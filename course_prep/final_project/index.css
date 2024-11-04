@@ -1,0 +1,150 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+* ul{
+    list-style: none;
+}
+main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    justify-content: flex-start;
+    align-content: center;
+    width: 90%;
+    margin: auto;
+    gap: 40px;
+}
+
+ navbar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: sticky;
+    grid-area: 1/1/2/5;
+}
+.first_nav, .second_nav{
+    display: flex;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap:minmax(15px, auto);
+    text-align: center;
+}
+.first_nav>li, .second_nav>li{
+    display: grid;
+    grid-auto-columns: 1fr;
+}
+.first_nav{
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+}
+.second_nav{
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-around;
+}
+/*
+.nav {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 0;
+}
+hr{
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+header{
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px;
+    height: 80vh;
+}
+button {
+    text-align: center;
+    color: white;
+    background-color: black;
+    width: 100px;
+    height: 25px;
+    margin: 10px;
+}
+.portret{
+    background-color: gray;
+    width: 400px;
+    height: 400px;
+}
+.about_writer{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50vh;
+}
+.about_writer p{
+    width: 40%;
+    text-align: left;
+    padding: 20px;
+}
+section{
+    padding: 20px;
+    display: flex;
+    margin-top: 20px;
+    border: solid 3px blue
+}
+section[name="books"]{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
+    height: 40vh;
+}
+section[name="books"] ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+}
+.book_cover{
+    width: 160px;
+    height: 200px;
+    background-color: gray;
+}
+section[name="about_book"]{
+    height: 50vh;
+    flex-direction: column;
+    background-color: lightblue;
+}
+.book_poster{
+    background-color: gray;
+    width: 400px;
+    height: 200px;
+    float: left;
+}
+section[name="characters"]{
+    flex-wrap: wrap;
+    height: 100vh;
+}
+.character{
+    display: flex;
+    width: 150px;
+    height: 100px;
+    background-color: gray;
+    margin: 5px;
+}
+section[name="biography"]{
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+footer{
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+} */
