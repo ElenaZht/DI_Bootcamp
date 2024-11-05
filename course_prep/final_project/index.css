@@ -81,7 +81,7 @@ article[class="about_writer"]{
     min-height: 200px;
     min-width: 200px;
 }
-/*
+
 
 
 button {
@@ -97,26 +97,35 @@ section{
     padding: 20px;
     display: flex;
     margin-top: 20px;
-    border: solid 3px blue
 }
 section[name="books"]{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: lightgray;
-    height: 40vh;
+    display: grid;
+    grid-area: 8/1/9/5;
+    height: 50vh;
 }
 section[name="books"] ul{
-    display: flex;
+    display: grid;
     list-style: none;
     align-items: center;
     justify-content: space-around;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1;
+}
+.book{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35vh;
+    padding: 5px;
 }
 .book_cover{
     width: 160px;
     height: 200px;
     background-color: gray;
 }
+
+/*
 section[name="about_book"]{
     height: 50vh;
     flex-direction: column;
