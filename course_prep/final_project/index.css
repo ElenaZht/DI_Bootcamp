@@ -7,9 +7,7 @@
     list-style: none;
 }
 hr{
-    background-color: black;
     width: 100%;
-    margin: 20px;
     margin: auto;
 }
 .hr_vertical{
@@ -194,14 +192,25 @@ section[name="characters"]{
     background-color: gray;
     border: solid 2px purple;
 }
-/*section[name="biography"]{
+section[name="biography"]{
     flex-direction: column;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start;
+    height: auto;
+}
+section[name="writer_photoes"]{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    height: auto;
 }
 footer{
-    background-color: lightgray;
+    display: grid;
+    width: 100%;
+    grid-area: 17/1/18/5;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
     display: flex;
-    align-items: center;
     justify-content: space-around;
-} */
+    align-items: center;
+    border-top: solid 2px lightgray;
+}
