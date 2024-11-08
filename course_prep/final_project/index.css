@@ -10,11 +10,13 @@ html{
     font-size: var(--small-text);
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    box-sizing: border-box;
 }
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
     font-family: 'Cinzel Decorative', serif;
     font-weight: 400;
+    text-align: center;
 }
 *{
     margin: 0;
@@ -115,9 +117,6 @@ article[class="about_writer"]{
     min-height: 200px;
     min-width: 200px;
 }
-
-
-
 button {
     text-align: center;
     color: white;
@@ -268,6 +267,41 @@ footer{
         --subheaders: 1.7rem;
         --normal-text: 1.4rem;
         --small-text: 1.05rem;
+    }
+    /*characters galary switch grids*/
+    section[name="characters"]{
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+    /*about book card img change proportion*/
+    .img_container{
+      min-width: 400px;
+    }
+    /*writer galary switch grids*/
+    section[name="writer_photoes"]{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+        height: auto;
+    }
+    /*books section book layout change*/
+    section[name="books"] ul{
+        display: flex;
+        list-style: none;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .book{
+        display: flex;
+        width: 33%;
+        height: 100px;
+        padding: 5px;
+    }
+    .book_cover{
+        width: 160px;
+        height: 200px;
+        background-color: gray;
     }
   }
   
