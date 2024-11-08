@@ -161,7 +161,9 @@ section[name="books"] ul{
 .section[name="about_book"]{
     display: grid;
     grid-area: 9/1/20/5;
-    min-height: 50vh;
+    height: 50vh;
+    min-height: 300px;
+    max-height: 500px;
     height: auto;
     overflow: hidden;
 }
@@ -296,12 +298,6 @@ footer{
         display: flex;
         width: 33%;
         height: 100px;
-        padding: 5px;
-    }
-    .book_cover{
-        width: 160px;
-        height: 200px;
-        background-color: gray;
     }
   }
   
@@ -317,6 +313,27 @@ footer{
         --normal-text: 1.3rem;
         --small-text: 1rem;
     }
+    /*books section book size change*/
+    .book_cover{
+        width: 120px;
+        height: 150px;
+    }
+    /*about book card proportion corrected*/
+    .section[name="about_book"]{
+        height: auto;
+        min-height: 300px;
+        max-height: 400px;
+    }
+    /*characters galary switch grids*/
+    section[name="characters"]{
+        grid-template-columns: repeat(2, 1.5fr);
+        grid-template-rows: auto 2fr;
+    }
+    /*writer galary switch grids*/
+    section[name="writer_photoes"]{
+        grid-template-columns: 2fr;
+        grid-template-rows: auto 3fr;
+    }
   }
   /* Mobile Portrait: 480px and below (portrait mode) */
 @media (max-width: 480px) {
@@ -324,10 +341,11 @@ footer{
         background-color: pink;
     }
     :root{
-        --main-title: 5rem;
+        --main-title: 4rem;
         --headers: 2.2rem;
         --subheaders: 2rem;
         --normal-text: 2rem;
         --small-text: 1.5rem;
     }
+
   }
