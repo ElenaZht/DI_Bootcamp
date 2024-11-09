@@ -11,6 +11,7 @@ html{
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     box-sizing: border-box;
+    width: 100%;
 }
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
@@ -54,14 +55,22 @@ main{
     gap: 40px;
     font-size: var(--normal-text);
 }
-
- navbar{
+navbar{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     position: sticky;
     grid-area: 1/1/2/5;
     margin-top: 10px;
+}
+.toggle-checkbox {
+    display: none; /* Hide the checkbox */
+  }
+.toggle-label {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none; /* Hidden by default, shown for mobile */
+    text-align: right;
 }
 .first_nav, .second_nav{
     display: flex;
@@ -260,9 +269,7 @@ footer{
 }
   /* Tablet Landscape: 1024px and below (landscape mode) */
   @media (max-width: 1024px) {
-    body {
-      background-color: lightyellow;
-    }
+
     :root{
         --main-title: 4.8rem;
         --headers: 1.9rem;
@@ -303,9 +310,7 @@ footer{
   
   /* Tablet Portrait: 768px and below (portrait mode) */
   @media (max-width: 768px) {
-    body {
-      background-color: green;
-    }
+
     :root{
         --main-title: 4rem;
         --headers: 1.7rem;
@@ -337,15 +342,137 @@ footer{
   }
   /* Mobile Portrait: 480px and below (portrait mode) */
 @media (max-width: 480px) {
-    body {
-        background-color: pink;
+
+    *{
+        /* margin-bottom: 20px; */
     }
     :root{
-        --main-title: 4rem;
+        --main-title: 2.5rem;
         --headers: 2.2rem;
         --subheaders: 2rem;
-        --normal-text: 2rem;
-        --small-text: 1.5rem;
+        --normal-text: 1.7rem;
+        --small-text: 1.2rem;
     }
-
-  }
+    article[class="about_writer"] .portret{
+        display: none;
+    }
+    navbar hr{
+        display: none;
+    }
+    .second_nav{
+        display: none;
+    }
+    .toggle-label{
+        display: flex;
+    }
+    .toggle-checkbox:checked ~ .second_nav {
+        display: flex;
+        cursor: pointer;
+      }
+    /*main structure redefine to flex*/
+    main{
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(10vh, auto);
+        gap: 10px;
+    }
+    navbar{
+        grid-area: 1/1/2/2;
+    }
+    .second_nav{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    header{
+        grid-area: 2/1/10/2;
+    }
+    article[class="about_writer"]{
+        grid-area: 10/1/11/2;
+    }
+    .about_writer p{
+        width: 100%;
+        font-size: var(--small-text);
+        /* defined 5 rows of text with ellipsis on the end*/
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 5;
+        -webkit-line-clamp: 5;
+        line-height: 1.5;
+        max-height: calc(1.5em * 5);
+    }
+    section[name="books"]{
+        display: grid;
+        grid-area: 11/1/13/2;
+        min-height: 60vh;
+        height: auto;
+    }
+    .book{
+        justify-content: flex-start;
+    }
+    .book h5{
+        font-size: var(--small-text);
+        width: 90%;
+        white-space: normal;
+        word-wrap: break-word; 
+    }
+    .section[name="about_book"]{
+        grid-area: 13/1/18/2;
+        height: 40vh;
+        height: auto;
+        min-height: 40vh;
+        max-height: 40vh;
+    }
+    .card{
+        flex-direction: column;
+        font-size: var(--small-text);
+        text-align: center;
+    }
+    .card h1, .card h3{
+        font-size: var(--normal-text);
+    }
+    .img_container{
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+    }
+    .card_body_description p{
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-clamp: 5;
+        -webkit-line-clamp: 5;
+        line-height: 1.5;
+        max-height: calc(1.5em * 5);
+    }
+    section[name="characters"]{
+        grid-area: 18/1/19/2;
+        height: 60vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1 20vh;
+    }
+    .character{
+        display: none;
+    }
+    section[name="characters"] div:first-child{
+        display: flex;
+    }
+    section[name="biography"]{
+        grid-area: 20/1/22/2;
+    }
+    section[name="writer_photoes"]{
+        grid-area: 22/1/23/2;
+        height: 60vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1 20vh;
+    }
+    section[name="writer_photoes"] div:first-child{
+        display: flexbox;
+    }
+    footer{
+        grid-area: 23/1/24/2;
+        height: 10vh;
+        font-size: var(--small-text);
+    }
+}
