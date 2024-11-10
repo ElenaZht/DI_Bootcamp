@@ -40,6 +40,14 @@ a, button, li{
     cursor: pointer;
     text-decoration: none;
     color: var(--bright-beige);
+    transition: all 0.3s ease;
+}
+a:hover{
+    color: var(--blood-big-title);
+    transform: scale(1.05);
+}
+a:active{
+    transform: scale(0.98);
 }
 *{
     margin: 0;
@@ -176,6 +184,19 @@ button {
     margin: 10px;
     padding: 10px;
     font-size: var(--normal-text);
+    transition: all 0.3s ease;
+}
+button:hover {
+    background-color: var(--blood-big-title);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 1);
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+  
+  /* Active Effect (when clicked/touched) */
+button:active {
+    background-color: var(--blood-big-title);
+    transform: scale(0.98); /* Slight shrink on click */
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.8); /* Smaller shadow on click */
 }
 
 section{
