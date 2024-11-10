@@ -1,10 +1,18 @@
 /* Default styles (for large screens or desktops) */
 :root{
+    /*FONTS*/
     --main-title: 5rem;
     --headers: 2rem;
     --subheaders: 1.8rem;
     --normal-text: 1.5rem;
     --small-text: 1.1rem;
+    /*COLORS*/
+    --dark-background: black;
+    --blood-big-title: #800000;
+    --old-blood: #982B1C;
+    --neutral-beigh: #DAD4B5;
+    --bright-beige: #F2E8C6;
+    --malahitus: #254336;
 }
 html{
     font-size: var(--small-text);
@@ -13,11 +21,19 @@ html{
     box-sizing: border-box;
     width: 100%;
 }
+body{
+    background-color: var(--dark-background);
+    color: var(--bright-beige);
+}
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
-    font-family: 'Cinzel Decorative', serif;
+    
     font-weight: 400;
     text-align: center;
+    
+}
+p{
+    text-indent: 25px;
 }
 *{
     margin: 0;
@@ -30,6 +46,8 @@ h1, h2, h3, h4, h5, h6{
 hr{
     width: 100%;
     margin: auto;
+    height: 1px;
+    border-color: var(--neutral-beigh);
 }
 .hr_vertical{
     width: 2px;
@@ -37,9 +55,13 @@ hr{
 }
 h1{
     font-size: var(--headers);
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--old-blood);
 }
 h3{
     font-size: var(--subheaders);
+    color: var(--old-blood);
+    font-weight: bold;
 }
 .esspesially_big_title{
     font-size: var(--main-title);
@@ -62,6 +84,12 @@ navbar{
     position: sticky;
     grid-area: 1/1/2/5;
     margin-top: 10px;
+}
+.logo{
+    font-size: var(--subheaders);
+    font-family: 'Cinzel Decorative', serif;
+    color: var(--blood-big-title);
+    text-shadow: 3px 3px var(--malahitus);
 }
 .toggle-checkbox {
     display: none; /* Hide the checkbox */
@@ -92,18 +120,25 @@ navbar{
     justify-content: space-around;
 }
 header{
-    background-color: gray;
+    border-left: 1px solid var(--bright-beige);
+    border-right: 1px solid var(--bright-beige);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
     grid-area: 2/1/7/5;
 }
 header h1{
     font-size: var(--main-title);
+    text-shadow: 3px 3px var(--malahitus);
+}
+header button{
+    border: solid 2px var(--bright-beige);
+    background-color: transparent;
+    color: var(--bright-beige);
 }
 article[class="about_writer"]{
+    margin-top: 10vh;
     display: grid;
     grid-area: 7/1/8/5;
     min-height: 40vh;
@@ -122,9 +157,10 @@ article[class="about_writer"]{
     display: flex;
     background-color: gray;
     grid-column: 1;
-    width: 40%;
-    min-height: 200px;
+    width: 30%;
+    height: auto;
     min-width: 200px;
+    box-shadow: inset 0px 0px 40px 40px #DBA632;
 }
 button {
     text-align: center;
@@ -177,7 +213,7 @@ section[name="books"] ul{
     overflow: hidden;
 }
 .card{
-    background-color: lightblue;
+    background-color: var(--malahitus);
     height: auto;
     min-height: 400px;
     display: flex;
@@ -233,6 +269,7 @@ section[name="books"] ul{
 }
 
 section[name="characters"]{
+    margin-top: 10vh;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -242,21 +279,26 @@ section[name="characters"]{
     display: grid;
     min-width: 150px;
     min-height: 100px;
+    width: 30%;
+    height: auto;
     background-color: gray;
-    border: solid 2px purple;
 }
 section[name="biography"]{
+    margin-top: 10vh;
     flex-direction: column;
     align-items: flex-start;
     height: auto;
 }
 section[name="writer_photoes"]{
+    margin-top: 10vh;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     height: auto;
 }
 footer{
+    margin-top: 10vh;
+    margin-bottom: 5h;
     display: grid;
     width: 100%;
     grid-area: 17/1/18/5;
