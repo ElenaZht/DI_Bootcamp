@@ -20,6 +20,7 @@ html{
     font-weight: 300;
     box-sizing: border-box;
     width: 100%;
+    scroll-behavior: smooth;
 }
 body{
     background-color: var(--dark-background);
@@ -27,13 +28,18 @@ body{
 }
 h1, h2, h3, h4, h5, h6{
     font-weight: normal;
-    
     font-weight: 400;
-    text-align: center;
-    
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;   
 }
 p{
     text-indent: 25px;
+}
+a, button, li{
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--bright-beige);
 }
 *{
     margin: 0;
@@ -136,6 +142,7 @@ header button{
     border: solid 2px var(--bright-beige);
     background-color: transparent;
     color: var(--bright-beige);
+    cursor: pointer;
 }
 article[class="about_writer"]{
     margin-top: 10vh;
@@ -157,7 +164,7 @@ article[class="about_writer"]{
     display: flex;
     background-color: gray;
     grid-column: 1;
-    width: 30%;
+    width: 25%;
     height: auto;
     min-width: 200px;
     box-shadow: inset 0px 0px 40px 40px #DBA632;

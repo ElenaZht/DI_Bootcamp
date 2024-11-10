@@ -25,19 +25,19 @@
         <input type="checkbox" id="toggle" class="toggle-checkbox" />
         <label for="toggle" class="toggle-label">☰</label>
         <ul class="second_nav">
-            <li>about</li>
-            <li>favourites</li>
-            <li>characters</li>
-            <li>life</li>
+            <li><a  href="#citate">about</a></li>
+            <li><a  href="#books">favourites</a></li>
+            <li><a  href="#chars">characters</a></li>
+            <li><a  href="#biography">life</a></li>
         </ul>
     </navbar>
     <header>
         <h1 class="esspesially_big_title">5 Reasons</h1>
         <h1 class="esspesially_big_title"> I love Bulgakov</h1>
         <br>
-        <button>Explore</button>
+        <button><a href="#books">Explore</a></button>
     </header>
-    <article class="about_writer">
+    <article id="citate" class="about_writer">
         <div class="about_writer_wrap">
             <p>
                 "- Bulgakov's works are timeless, transcending their era to speak to the universal struggles of humanity—faith, power, and the search for meaning..."
@@ -45,32 +45,47 @@
             <img alt="Bulgakov's portrete" class="portret" src="./media/bulgakov/download.jpeg">
         </div>
     </article>
-    <section name="books">
+    <section name="books" id="books"> 
         <ul>
             <li class="book">
-                <img alt="Doctor book cover" src="./media/books/doctor/71dGZk7CW0L._AC_UF1000,1000_QL80_.jpg" class="book_cover">
-                <h5>Sketches of a Country Doctor</h5>
+                <a href="#doctor">
+                    <img alt="Doctor book cover" src="./media/books/doctor/71dGZk7CW0L._AC_UF1000,1000_QL80_.jpg" class="book_cover">
+                    <h5>Sketches of a Country Doctor</h5>
+                </a>
+                
             </li>
             <li class="book">
-                <img alt="Morhpine book cover" src="./media/books/morphine/book.jpg" class="book_cover">
-                <h5>Morphine</h5>
+                <a href="#morphine">
+                    <img alt="Morhpine book cover" src="./media/books/morphine/book.jpg" class="book_cover">
+                    <h5>Morphine</h5>
+                </a>
+                
             </li>
             <li class="book">
-                <img alt="Fatal eggs book cover" src="./media/books/fatal_eggs/81Mp1dJ7ajL._AC_UF894,1000_QL80_.jpg" class="book_cover">
-                <h5>The fatal eggs</h5>
+                <a href="#eggs">
+                    <img alt="Fatal eggs book cover" src="./media/books/fatal_eggs/81Mp1dJ7ajL._AC_UF894,1000_QL80_.jpg" class="book_cover">
+                    <h5>The fatal eggs</h5>
+                </a>
+                
             </li>
             <li class="book">
-                <img alt="Master and Margarite book cover" src="./media/books/master/9780143108276.jpeg" class="book_cover">
-                <h5>The Master and Margarita</h5>
+                <a href="#master">
+                    <img alt="Master and Margarite book cover" src="./media/books/master/9780143108276.jpeg" class="book_cover">
+                    <h5>The Master and Margarita</h5>
+                </a>
+                
             </li>
             <li class="book">
-                <img alt="Dog's heart book cover" src="./media/books/dog/Dog's_heart.jpg" class="book_cover">
-                <h5>A Dog's Heart</h5>
+                <a href="#dog">
+                    <img alt="Dog's heart book cover" src="./media/books/dog/Dog's_heart.jpg" class="book_cover">
+                    <h5>A Dog's Heart</h5>
+                </a>
+                
             </li>
             
         </ul>
     </section>
-    <section name="about_book">
+    <section name="about_book" id="doctor">
         <div class="card">
             <div class="img_container">
                 <img alt="doctor_film_frame" src="./media/books/doctor/doctor.jpg" alt="book1" class="book_poster">
@@ -95,14 +110,14 @@
                 </div>
                 <hr>
                     <div class="card_links">
-                        <a name="buy_book">Read more about</a>
-                        <a name="buy_book">By the book</a>
+                        <a name="buy_book" href="https://medhum.med.nyu.edu/view/207" target="_blank">Read more about</a>
+                        <a name="buy_book" href="https://www.amazon.com/s?k=A+Country+Doctor%27s+Notebook&i=stripbooks"  target="_blank">By the book</a>
                     </div>
             </div>
                 
         </div>
     </section>
-    <section name="about_book">
+    <section name="about_book" id="morphine">
         <div class="card">
             <div class="img_container">
                 <img alt="morphine_film_frame" src="./media/books/morphine/mophine.jpg" alt="book1" class="book_poster">
@@ -140,14 +155,14 @@
                 </div>
                 <hr>
                     <div class="card_links">
-                        <a name="buy_book">Read more about</a>
-                        <a name="buy_book">By the book</a>
+                        <a name="buy_book" href="https://medhum.med.nyu.edu/view/210" target="_blank">Read more about</a>
+                        <a name="buy_book" href="https://www.barnesandnoble.com/w/morphine-mikhail-boulgakov/1121196846" target="_blank">By the book</a>
                     </div>
             </div>
                 
         </div>
     </section>
-    <section name="about_book">
+    <section name="about_book"  id="eggs">
         <div class="card">
             <div class="img_container">
                 <img alt="fatal eggs film frame" src="./media/books/fatal_eggs/eggs.jpg" alt="book1" class="book_poster">
@@ -178,14 +193,14 @@
                 </div>
                 <hr>
                     <div class="card_links">
-                        <a name="buy_book">Read more about</a>
-                        <a name="buy_book">By the book</a>
+                        <a name="buy_book" href="https://www.bookey.app/book/the-fatal-eggs" target="_blank">Read more about</a>
+                        <a name="buy_book" href="https://www.barnesandnoble.com/w/the-fatal-eggs-mikhail-bulgakov/1100233905" target="_blank">By the book</a>
                     </div>
             </div>
                 
         </div>
     </section>
-    <section name="about_book">
+    <section name="about_book"  id="master">
         <div class="card">
             <div class="img_container">
                 <img alt="master film frame" src="./media/books/master/master.jpg" alt="book1" class="book_poster">
@@ -210,14 +225,14 @@
                 </div>
                 <hr>
                     <div class="card_links">
-                        <a name="buy_book">Read more about</a>
-                        <a name="buy_book">By the book</a>
+                        <a name="buy_book" href="https://www.britannica.com/topic/The-Master-and-Margarita" target="_blank">Read more about</a>
+                        <a name="buy_book" href="https://www.barnesandnoble.com/w/the-master-and-margarita-mikhail-bulgakov/1100011258" target="_blank">By the book</a>
                     </div>
             </div>
                 
         </div>
     </section>
-    <section name="about_book">
+    <section name="about_book"  id="dog">
         <div class="card">
             <div class="img_container">
                 <img alt="dogs heart film frame" src="./media/books/dog/dogs_heart.jpg" alt="book1" class="book_poster">
@@ -245,15 +260,15 @@
                 </div>
                 <hr>
                     <div class="card_links">
-                        <a name="buy_book">Read more about</a>
-                        <a name="buy_book">By the book</a>
+                        <a name="buy_book" href="https://www.rbth.com/arts/337321-bulgakov-heart-dog-short-summary" target="_blank">Read more about</a>
+                        <a name="buy_book" href="https://www.amazon.com/s?k=Heart+of+a+Dog+Mikhail+Bulgakov" target="_blank">By the book</a>
                     </div>
             </div>
                 
         </div>
     </section>
      
-    <section name="characters">
+    <section name="characters" id="chars">
         <img src="./media/books/doctor/char.png" class="character"></img>
         <img src="./media/books/dog/MV5BNzY0YzExZDctMTFjMi00MGNmLTkxMDEtNWYyMGVkY2RiYzRhXkEyXkFqcGc@._V1_.jpg" class="character"></img>
         <img src="./media/books/fatal_eggs/char.jpg" class="character"></img>
@@ -267,7 +282,7 @@
         <img src="./media/books/master/pontiy.jpeg" class="character"></img>
         <img src="./media/books/master/masterandm.jpg" class="character"></img>
     </section>
-    <section name="biography">
+    <section name="biography" id="biography">
         <h1 class="esspesially_big_title">Michael Bulgakov</h1>
         <h3>1891 - 1940</h3>
         <p> Mikhail Bulgakov was born in Kiev on May 15 1891.
@@ -297,7 +312,7 @@
     </section>
     
     <footer>
-        <p>Wiki</p>
+        <a href="https://en.wikipedia.org/wiki/Mikhail_Bulgakov" target="_blank">Wiki</a>
         <div  class="logo">MB</div>
         <p>2024</p>
     </footer>
