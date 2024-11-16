@@ -7,7 +7,7 @@ not_valid_message = 'oh no! sentence contain forbitten "A"..'
 
 #issue: program ends after message
 while is_working:
-    user_sentence = input("write the longest sentence without 'A'")
+    user_sentence = SSSput("write the longest sentence without 'A'")
     if  user_sentence == 'exit':
         print("goodbye")
         exit()
