@@ -4,10 +4,15 @@
 
 def type_count(**kwargs):
     count = {}
+    
     for k in kwargs:
-        if type(k) in count:
-            count[type(k)] += 1
+        if type(kwargs[k]) in count:
+            count[type(kwargs[k])] += 1
         else:
-            count[type(k)] = 1
+            count[type(kwargs[k])] = 1
 
-print(type_count({'a': 1, 'b': 'string', 'c': 1.0, 'd': True, 'e': False}))
+    return count
+
+types = type_count(a=1,b='string',c=1.0,d=True,e=False)
+for t in types:
+    print(f"{t.__name__}: {types[t]}")
