@@ -1,0 +1,50 @@
+{
+    "lili": {
+        "name": "lili",
+        "age": "10",
+        "attributes": [
+            {
+                "Strength": 13
+            },
+            {
+                "Dexterity": 11
+            },
+            {
+                "Constitution": 14
+            },
+            {
+                "Intelligence": 9
+            },
+            {
+                "Wisdom": 12
+            },
+            {
+                "Charisma": 11
+            }
+        ]
+    },
+    "bob": {
+        "name": "bob",
+        "age": "12",
+        "attributes": [
+            {
+                "Strength": 14
+            },
+            {
+                "Dexterity": 13
+            },
+            {
+                "Constitution": 16
+            },
+            {
+                "Intelligence": 12
+            },
+            {
+                "Wisdom": 16
+            },
+            {
+                "Charisma": 16
+            }
+        ]
+    }
+}

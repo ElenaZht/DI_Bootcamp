@@ -1,0 +1,27 @@
+***Dungeons & Dragons***
+
+
+Player Name: lili
+Age: 10
+Attributes:
+  - Strength: 13
+  - Dexterity: 11
+  - Constitution: 14
+  - Intelligence: 9
+  - Wisdom: 12
+  - Charisma: 11
+
+==============================
+
+Player Name: bob
+Age: 12
+Attributes:
+  - Strength: 14
+  - Dexterity: 13
+  - Constitution: 16
+  - Intelligence: 12
+  - Wisdom: 16
+  - Charisma: 16
+
+==============================
+
