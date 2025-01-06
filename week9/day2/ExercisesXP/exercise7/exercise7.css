@@ -1,0 +1,45 @@
+nav{
+    width: 100%;
+    height: 15vh;
+    background-color: coral;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+ul{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+.navlink{
+    padding-left: 0;
+    font-size: 20px;
+    margin: 5%;
+    cursor: pointer;
+}
+.navlink:hover{
+    color: brown;
+}
+.userInfo{
+    display: flex;
+    width: 30%;
+    height: 90%;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    margin: auto;
+}
+.user{
+     font-size: 25px;
+     color: black;
+}
+.photo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}
