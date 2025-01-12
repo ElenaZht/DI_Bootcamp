@@ -1,0 +1,145 @@
+@font-face {
+    font-family: "Monserat";
+    src: url("assets/Montserrat-VariableFont_wght.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "Sega";
+    src: url("assets/SEGA.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+body{
+    margin: 0;
+    padding: 0;
+}
+:root {
+    /* Colors */
+    --main-background: black;
+    --navbar-color: #5800FF;
+    --card-color: mediumslateblue;
+    --details: #FFC600;
+
+    /* Font-sizes */
+    --logo-size: 50px;
+    --regular-size: 25px;
+    --small-size: 15px;
+
+    /* Font-families */
+    --main-font: "Monserat";
+    --spessial-font: "Sega";
+
+  }
+
+*{
+    font-size: var(--regular-size);
+    color: darkgray;
+}
+.container{
+    background-color: var(--main-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 100vh;
+}
+
+/* -----------Navbar----------- */
+navbar{
+    background-color: var(--navbar-color);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 10%;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.logo{
+    font-size: var(--logo-size);
+    font-family: var(--spessial-font);
+    text-align: center;
+    color: var(--card-color);
+}
+input{
+    width: 500px;
+    height: 35px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin-left: 50px;
+}
+input::placeholder{
+    padding: 5px;
+    font-family: var(--main-font);
+}
+button[name='search']{
+    font-size: var(--);
+    height: 50%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--details);
+    color: white;
+    margin-left: 25px;
+    transform: scale(1);
+    transition: ease 1s;
+    font-family: var(--main-font);
+}
+button[name='search']:hover{
+    color: var(--card-color);
+    transform: scale(1.1);
+}
+button[name='search']:active{
+    transform: scale(1.2);
+}
+
+/* -----------Robot Cards----------- */
+.robots{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+    height: auto;
+    margin-top: 60px;
+}
+.robotCard{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: var(--card-color);
+    background-image: url('assets/circuit-pattern.png');
+    border-radius: 5px;
+    width: 400px;
+    height: 500px;
+    padding: 15px;
+    box-sizing: border-box;
+    margin: 15px;
+}
+
+.robotPicture{
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+}
+.robotName{
+    font-size: calc(var(--regular-size) * 1.5);
+    font-family: var(--main-font);
+    text-align: left;
+    color: var(--details);
+}
+.robotEmail{
+    font-size: var(--small-size);
+    font-family: var(--main-font);
+    text-align: left;
+    color: darkblue;
+}
