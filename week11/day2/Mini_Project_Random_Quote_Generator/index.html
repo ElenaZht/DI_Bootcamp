@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generetor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container main">
+        <div class="title">
+            <h1>My quotes</h1>
+            <h3>Motivational, insparetional and more!</h3>
+        </div>
+        <div class="content">
+            <p class="quote"></p>
+            <p class="author"></p>
+            <p class="likes"></p>
+        </div>
+        <button id="genButton">generate</button>
+        <div class="container">
+            <input type="text" id="quoteInput" placeholder="Enter a new quote">
+            <input type="text" id="authorInput" placeholder="Enter the author">
+            <button id="addButton">Add</button>
+        </div>
+        <div class="container">
+            <button id="numCharButton">number of characters(space included): </button>
+            <span id="numChar"></span>
+        </div>
+        <div class="container">
+            <button id="numCharNoWhiteButton">number of characters(space not included): </button>
+            <span id="numCharNotWhite"></span>
+        </div>
+        <div class="container">
+            <button id="numWordsButton">number of words: </button>
+            <span id="numWords"></span>
+        </div>
+        <button id="likeButton">Like</button>
+        <hr>
+        <div class="container">
+            <input type="text" placeholder="enter author's name" id="authorSearchInput">
+            <button id="searchByAuthorButton">Search</button>
+            <div class="quites"></div>
+            <div class="container">
+                <button id="revButton">Previous</button>
+                ----
+                <button id="nextButton">Next==></button>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
