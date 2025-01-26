@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <p>Insert coordinates of any two cities and get sunrise time!</p>
+        <form>
+            <label for="lat1">latitude</label>
+            <input name="lat1" id="lat1" type="number">
+            <label for="lon1">longitude</label>
+            <input name="lon1" id="lon1" type="number">
+
+            <label for="lat2">latitude</label>
+            <input name="lat2" id="lat2" type="number">
+            <label for="lon2">longitude</label>
+            <input name="lon2"  id="lon2"  type="number">
+
+            <button id="getSunrise">Get sunrise</button>
+        </form>
+        <div class="output"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
+<!--create a form with 4 inputs:
+the latitude and longitude of the first city
+the latitude and longitude of the second city-->
