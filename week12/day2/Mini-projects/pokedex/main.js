@@ -21,8 +21,7 @@ async function fetchAllPokemons(){
 }
 
 function showPokemon(pokemon){
-    console.log('showing ', pokemon.name)
-    const output = document.getElementsByClassName('output')[0]
+    const output = document.getElementById('output')
     output.innerHTML = ''
 
     const name = document.createElement('p')
@@ -45,6 +44,10 @@ function showPokemon(pokemon){
     output.appendChild(height)
     output.appendChild(weight)
     output.appendChild(type)
+
+    const image = document.getElementById('pokemonImg')
+    image.src = pokemon.sprites.back_default
+
 }
 
 async function getPokemonInfo(url) {
@@ -68,7 +71,23 @@ function showError(msg){
     console.log('error ocured: ', msg)
 }
 
+function spinnerOn(){
+    const parent = document.getElementById('output')
+    const spinner = document.createElement('div')
+    spinner.classList.add('spinner')
+    spinner.id = 'spinner'
+    parent.appendChild(spinner)
+}
+
+function spinnerOff(){
+    const spinner = document.getElementById('spinner')
+    if (spinner){
+        spinner.remove()
+    }
+}
+
 async function randomPokemon(arr){
+
     const randNum = Math.floor(Math.random() * 100)
     const randPokemon = arr[randNum]
     const fullPokemonInfo = await getPokemonInfo(randPokemon.url)
@@ -77,9 +96,11 @@ async function randomPokemon(arr){
         showPokemon(fullPokemonInfo)
         viewed.push(fullPokemonInfo)
         currentPokemonIdx++
-        console.log('curr index ', currentPokemonIdx)
+        spinnerOff()
 
     } else {
+
+        spinnerOff()        
         showError('cant get full information')
     }
 }
@@ -88,8 +109,6 @@ function getPrevPokemon(){
     if (currentPokemonIdx > 0){
         const prevPokemon = viewed[currentPokemonIdx - 1]
         currentPokemonIdx--
-        console.log('curr index ', currentPokemonIdx)
-        console.log('prev ',  prevPokemon.name)
         return prevPokemon
     }
 }
@@ -98,8 +117,6 @@ function getNextPokemon(){
     if (currentPokemonIdx < viewed.length - 1){
         const nexPokemon = viewed[currentPokemonIdx + 1]
         currentPokemonIdx++
-        console.log('curr index ', currentPokemonIdx)
-        console.log('next ',  nexPokemon.name)
         return nexPokemon
     }
 }
@@ -111,6 +128,7 @@ async function main(){
     const randomPokemonBtn = document.getElementById('randomPokemonBtn')
     randomPokemonBtn.addEventListener('click', (event) => {
         event.preventDefault()
+        spinnerOn()
         randomPokemon(allPokemonsArr)
     })
 

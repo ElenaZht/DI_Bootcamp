@@ -1,0 +1,94 @@
+body{
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+*{
+    box-sizing: border-box;
+}
+img{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.map{
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+#pokedex{
+    width: 50vw;
+    height: 50vh;
+}
+#randomPokemonBtn{
+    position: absolute;
+    left: 88%;
+    top: 74%; 
+}
+#prev{
+    position: absolute;
+    right: 52%;
+    top: 73%;
+}
+#next{
+    position: absolute;
+    left: 50%;
+    top: 73%;
+}
+#pokemonImg{
+    position: absolute;
+    width: 190px;
+    height: 164px;
+    left: 56%;
+    top: 6%;
+}
+#output{
+    position: absolute;
+    width: 190px;
+    height: 164px;
+    top: 58%;
+    left: 56%;
+    padding: 0;
+    text-align: left;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+p{
+    margin: 2px;
+}
+button{
+    opacity: 0;
+}
+.instructions{
+    position: absolute;
+    left: 90%;
+    width: 350px;
+    top: 11%;
+}
+
+/* Spinner styles */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid lightgray;
+    border-top: 4px solid steelblue;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+    /* Spinner animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

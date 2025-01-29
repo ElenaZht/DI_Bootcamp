@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <button id="randomPokemonBtn">random</button>
-    <div class="output"></div>
-    <div class="nav">
-        <button id="prev"><==Prev</button>
-        <button id="next">Next==></button>
+    <div class="map">
+        <img src="logo.png" alt="pokemons logo">
+        <img src="pokedex.png" alt="pokedex image" id="pokedex">
+        <img class="img" id="pokemonImg"></img>
+        <button id="randomPokemonBtn">random</button>
+        <div id="output"></div>
+        <button id="prev">< Prev</button>
+        <button id="next">Next ></button>
+        <div class="instructions">
+            <p><b>How to use:</b></p>
+            <p><b>1</b>-Press the <b>green</b> button to get a random Pokémon</p>
+            <p><b>2</b>-Press the <b>left</b> and <b>right</b> buttons to see  previous and next Pokémon.</p>
+        </div>
+
     </div>
     <script src="main.js"></script>
 </body>
