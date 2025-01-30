@@ -9,7 +9,6 @@ async function fetchConvertionRate(base, target) {
 
         try{
             const respJson = await response.json()
-            console.log(`1${base} = ${respJson.conversion_rate}${target}`)
             return respJson.conversion_rate
 
         } catch (error){
@@ -26,8 +25,7 @@ async function fetchConvertionRate(base, target) {
 
 async function convert(base, target, amount){
     const rate = await fetchConvertionRate(base, target)
-    console.log(typeof rate, typeof amount)
-    return rate * amount
+    return (rate * amount).toFixed(2)
     
 }
 
@@ -52,8 +50,11 @@ async function inputHandler(event){
 
     const amount = document.getElementById('amount').value
 
-    const convertionResult = await convert(base, target, +amount)
-    showResult(convertionResult, target)
+    if (amount){
+        const convertionResult = await convert(base, target, +amount)
+        showResult(convertionResult, target)
+    }
+
 
 }
 
@@ -73,7 +74,55 @@ async function switchCurrencies(event){
     }
 }
 
-function main(){
+async function loadOptions() {
+    //fetch currency options codes
+    const apikey = 'ee6b19f17e3e29a859f2ce42'
+    const url = `https://v6.exchangerate-api.com/v6/${apikey}/codes`
+    try{
+        let response = await fetch(url)
+
+        try{
+            response = await response.json()
+            if (response.result === "success"){
+                const options = response.supported_codes
+    
+                // for add option
+                const baseOptionsContainer = document.querySelector("select[id='base']")
+                const targetOptionsContainer = document.querySelector("select[id='target']")
+    
+                for (let option of options){
+                    const newBaseOption = document.createElement('option')
+                    newBaseOption.value = option[0]
+                    newBaseOption.textContent = option[0]
+                    baseOptionsContainer.appendChild(newBaseOption)
+
+                    const newTargetOption = document.createElement('option')
+                    newTargetOption.value = option[0]
+                    newTargetOption.textContent = option[0]
+                    targetOptionsContainer.appendChild(newTargetOption)
+
+                }
+    
+    
+            } else {
+    
+                console.error('cant fetch currencies: ', result.error-type)
+            }
+
+        } catch (error){
+            console.error('cant parse result', error)
+        }
+
+
+    } catch (error){
+        console.error('no response: ', error)
+    }
+
+}
+
+async function main(){
+    await loadOptions()
+
     const convertBtn = document.getElementById('convertBtn')
     convertBtn.addEventListener('click', inputHandler)
 
