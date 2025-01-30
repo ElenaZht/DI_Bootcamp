@@ -43,26 +43,42 @@ async function inputHandler(event){
         alert('chose base')
         return
     }
-    console.log('base is ', base)
 
     const target = document.getElementById('target').value
     if (!target){
         alert('chose target')
         return
     }
-    console.log('target is ', target)
 
     const amount = document.getElementById('amount').value
 
     const convertionResult = await convert(base, target, +amount)
-    console.log(convertionResult)
     showResult(convertionResult, target)
 
+}
+
+async function switchCurrencies(event){
+    event.preventDefault()
+    const base = document.getElementById('base').value
+    const target = document.getElementById('target').value
+    let temp = base
+
+    if (base && target){
+        document.getElementById('base').value = target
+        document.getElementById('target').value = temp
+
+        const amount = document.getElementById('amount').value
+        const convertionResult = await convert(base, target, +amount)
+        showResult(convertionResult, target)
+    }
 }
 
 function main(){
     const convertBtn = document.getElementById('convertBtn')
     convertBtn.addEventListener('click', inputHandler)
+
+    const switchBtn = document.getElementById('switch')
+    switchBtn.addEventListener('click', switchCurrencies)
     
 }
 main()
