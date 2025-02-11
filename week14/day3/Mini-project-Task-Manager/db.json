@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Buy groceries",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Finish homework",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "title": "Clean the house",
+    "completed": false
+  },
+  {
+    "id": "f510ed22-75d2-454d-8538-22dd261163fd",
+    "title": "unique item",
+    "completed": false
+  }
+]
