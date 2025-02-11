@@ -79,7 +79,7 @@ export const loginUser = async(req, res) => {
         res.status(200).json({"messege": "Authorized"})
 
     } catch (error) {
-        res.status(401).json({ message: "Username or password are incorrect." });
+        res.status(500).json({ message: "Server error" });
     }
     
     
