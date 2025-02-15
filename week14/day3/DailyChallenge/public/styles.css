@@ -1,0 +1,54 @@
+body{
+    height: 100vh;
+    background-color: crimson;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.container{
+    background-color: white;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 15px;
+    overflow: hidden;
+}
+.wrapper{
+    margin: 5px;
+}
+button{
+    margin: 10px;
+    outline: none;
+    border: none;
+    background-color: magenta;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+button:hover{
+    box-shadow: 10px 10px 2px 1px rgba(0, 0, 255, .2);
+    transform: scale(1.05);
+}
+button:active{
+    background-color: darkmagenta;
+}
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.message{
+    width: 80%;
+    height: 20px;
+}
+
+.success{
+    color: green;
+}
+
+.fail{
+    color: red;
+}
