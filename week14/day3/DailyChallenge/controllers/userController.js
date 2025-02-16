@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 const saltRounds = 10;
 import { v4 as uuidv4 } from 'uuid';
 
-// Get all users
+
 export const getAllUsers = async (req, res) => {
     try {
         const allUsers = await usersContentLoader();
@@ -19,7 +19,7 @@ export const getAllUsers = async (req, res) => {
     }
 };
 
-// Get user by ID
+
 export const getUserByID = async (req, res) => {
     try {
         const users = await usersContentLoader();
@@ -35,7 +35,7 @@ export const getUserByID = async (req, res) => {
     }
 };
 
-// Update user
+
 export const updateUser = async (req, res) => {
     if (req.body && req.params.id) {
         const users = await usersContentLoader();
@@ -84,7 +84,7 @@ export const updateUser = async (req, res) => {
     }
 };
 
-// Register a new user
+
 export const registerUser = async (req, res) => {
     const { username, password } = req.body;
     if (username && password) {
