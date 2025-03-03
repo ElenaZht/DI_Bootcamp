@@ -16,6 +16,7 @@ app.get('/api/hello', (req, res) => {
 })
 app.post('/api/world', (req, res) => {
     const { message } = req.body
+    console.log(message)
     res.status(200).json({"responseMessage": `I recieved your POST request. This is what you sent me: ${message}`})
 })
 
