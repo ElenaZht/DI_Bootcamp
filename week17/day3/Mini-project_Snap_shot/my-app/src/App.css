@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Josefin+Sans:wght@300;400;700&display=swap');
+
+
+#root{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
+
+}
+h1{
+  font-family: "Lobster", "Josefin Sans", Helvetica, Arial, sans-serif;
+  font-size: 4em;
+  text-align: center;
+}
+h2{
+  font-size: 2em;
+  text-align: center;
+}
+.navContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+}
+.navButton{
+  font-family: "Josefin Sans", Helvetica, Arial, sans-serif;
+  display: block;
+  background: #051c33;
+  border-radius: 3px;
+  padding: 5px;
+  color: #fff;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #213547;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  margin-bottom: 20px;
+}
+input{
+  font-size: 1em;
+  width: 100%;
+  background-color: #edeff0;
+  padding: 10px 15px;
+  border: 2px solid #d7dbdf;
+  border-right: none;
+  border-radius: .35em 0 0 .35em;
+  outline: none;
+  box-sizing: border-box;
+
+}
+button[type="submit"]{
+  background-color: #213547;
+  color: white;
+  width: fit-content;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 0 .35em .35em 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.picturesContainer{
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.pictureWrap{
+  overflow: hidden;
+  width: 220px;
+  height: 165px;
+}
+img{
+  width: 100%;
+  height: 100%;
+  transition: transform 1.25s;
+}
+img:hover{
+  transform: scale(1.25);
+  transition: transform 1.25s; 
+}
