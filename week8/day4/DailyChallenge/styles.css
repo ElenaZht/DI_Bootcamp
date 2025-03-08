@@ -1,0 +1,122 @@
+body{
+    margin: 0;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(214, 37, 72);
+    width: 100%;
+    height: 100vh;
+    color: white;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    font-size: 50px;
+    font-family: sans-serif;
+}
+form[name='taskInputForm']{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    color: darkgray;
+    font-size: 25px;
+    padding: 10px;
+    width: 400px;
+}
+input[type='text']{
+    border: none;
+    width: 100%;
+    height: 50px;
+    font-size: 25px;
+    color: rgb(63, 60, 60);
+    font-family: sans-serif;
+    outline: none;
+}
+input[type='text']::placeholder{
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+#addTaskButton{
+    color: rgb(81, 143, 204);
+    margin: auto;
+    transform: scale(1);
+    transition: 1s ease;
+    font-family: sans-serif;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+#addTaskButton:hover{
+    color: palevioletred;
+}
+#addTaskButton:active{
+    transform: scale(1.2);
+}
+#addTaskButton:disabled {
+    color: grey;               /* Change color to grey when disabled */
+    cursor: not-allowed;       /* Change cursor to indicate disabled state */
+    transform: scale(1);       /* Keep normal size when disabled */
+}
+.listTasks{
+    background-color: white;
+    color: rgb(63, 60, 60);
+    font-size: 25px;
+    padding: 10px;
+    width: 400px;
+    min-height: 150px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.task-item{
+    border-bottom: solid rgb(22, 96, 170) 1px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+.taskLabel{
+    color: rgb(63, 60, 60);
+    font-size: 25px;
+    padding: 10px;
+}
+.clearButton{
+    color: red;
+    padding: 5px;
+    font-size: 25px;
+    font-family: sans-serif;
+    border: none;
+    background-color: transparent;
+
+}
+.clearButton:hover{
+    color: palevioletred;
+}
+.clearButton:active{
+    transform: scale(1.1);
+}
+.done{
+    color: red;
+    text-decoration: line-through;
+}
+.removeBtn{
+    background-color: red;
+    border: none;
+    color: white;
+}
+.tasks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    margin: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
