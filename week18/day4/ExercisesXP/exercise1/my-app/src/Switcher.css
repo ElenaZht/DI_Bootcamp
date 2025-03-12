@@ -1,0 +1,33 @@
+.switchContainer{
+    width: 100px;
+    height: 50px;
+    margin: auto;
+    position: relative;
+}
+.switherRail{
+    border-radius: 25px;
+    width: 90px;
+    height: 35px;
+    background-color: lightgray;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+}
+.switcherToggle{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    position: absolute;
+    transition: 1s ease;
+    transform-origin: center;
+}
+input[type='radio']{
+    z-index: 0;
+    width: 30px;
+    height: 100%;
+    margin: auto;
+    opacity: 0;
+}
