@@ -1,0 +1,39 @@
+#root {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(247, 200, 215);
+  font-size: 20px;
+}
+.container{
+  display: flex;
+}
+.plannerContainer{
+  background-color: white;
+  width: 350px;
+  max-width: 100%;
+  background: white;
+  border: 1px solid #a0a096;
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  line-height: 1.125em;
+}
+.listContainer{
+  width: 80%;
+  margin: auto;
+}
+.removeBtn{
+  padding: 3px;
+}
+.task{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: fit-content;
+  gap: 5px;
+}
