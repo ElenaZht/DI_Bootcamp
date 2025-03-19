@@ -1,0 +1,42 @@
+#root {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(154, 180, 197);
+  font-size: 20px;
+}
+button{
+  padding: 10px;
+  line-height: 1;
+}
+.container{
+  min-width: 500px;
+  display: flex;
+  gap: 20px;
+  background-color: antiquewhite;
+}
+.react-calendar{
+  width: 400px;
+  height: fit-content;
+  padding: 15px;
+}
+.react-calendar button{
+  border-radius: 0;
+}
+.tasks{
+  width: 300px;
+}
+.task{
+  display: flex;
+  align-items: center;
+  gap: 5px
+}
+.plannerContainer{
+  padding: 15px;
+}
