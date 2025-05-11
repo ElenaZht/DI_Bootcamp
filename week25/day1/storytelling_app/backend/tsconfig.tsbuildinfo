@@ -1,0 +1,1 @@
+{"root":["./src/app.ts","./src/controllers/storyController.ts","./src/controllers/userController.ts","./src/db/db.ts","./src/helpers/auth.ts","./src/helpers/inputValidations.ts","./src/helpers/jwt_helper.ts","./src/models/storyModel.ts","./src/models/userModel.ts","./src/routes/storyRouter.ts","./src/routes/userRouter.ts"],"errors":true,"version":"5.8.3"}
