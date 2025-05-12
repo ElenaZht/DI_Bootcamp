@@ -9,6 +9,7 @@ export interface User {
 
 export interface UserState {
     currentUser: User | null;
+    token: string | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isAuthenticated: boolean;

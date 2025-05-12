@@ -1,0 +1,30 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+interface RefreshResponse {
+    accessToken: string;
+    message: string;
+}
+
+export const refreshToken = createAsyncThunk(
+    "user/refresh-token",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/user/refresh-token', {
+                method: 'GET',
+                credentials: 'include', // needed for cookies
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Token refresh failed');
+            }
+
+            const data: RefreshResponse = await response.json();
+            return data;
+        } catch (error: any) {
+            return rejectWithValue(error.message);
+        }
+    }
+)

@@ -1,20 +1,41 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '../../features/thunks/LoginThunk'
+import type { AppDispatch } from '../../features/store'
 
 interface LoginForm {
   email: string;
   password: string;
 }
+interface LoginError {
+    message: string;
+}
 
 export default function LogInPage() {
-  const [formData, setFormData] = useState<LoginForm>({
-    email: '',
-    password: ''
-  });
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const [formData, setFormData] = useState<LoginForm>({
+        email: '',
+        password: ''
+    });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
+    setIsLoading(true);
+    try {
+        await dispatch(loginUser(formData)).unwrap();
+        navigate('/');
+
+    } catch (err) {
+        const error = err as LoginError;
+        setError(error.message || 'Login failed');
+    } finally {
+        setIsLoading(false);
+    }
     console.log('Login attempted:', formData);
   };
 
@@ -23,6 +44,7 @@ export default function LogInPage() {
       ...formData,
       [e.target.name]: e.target.value
     });
+    console.log(formData)
   };
 
   return (
@@ -61,7 +83,9 @@ export default function LogInPage() {
           </div>
 
           <div className="card-actions justify-end mt-4">
-            <button type="submit" className="btn btn-primary">Login</button>
+            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+                {isLoading ? 'Logging in...' : 'Login'}
+            </button>
           </div>
           
           <div className="text-center mt-4">

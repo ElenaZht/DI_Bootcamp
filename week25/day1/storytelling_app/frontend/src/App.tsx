@@ -7,10 +7,27 @@ import SignUpPage from './app/pages/SignUpPage'
 import AccountPage from './app/pages/AccountPage'
 import StoryViewer from './app/pages/StoryViewer'
 import AddStory from './app/pages/components/AddStory'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from './features/store';
+import { refreshToken } from './features/thunks/RefreshToken';
 
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+      const tryRefreshToken = async () => {
+          try {
+              await dispatch(refreshToken()).unwrap();
+          } catch (err) {
+              console.error('Failed to refresh token:', err);
+          }
+      };
+
+      tryRefreshToken();
+  }, [dispatch]);
+  
   return (
     <>
       <Router>

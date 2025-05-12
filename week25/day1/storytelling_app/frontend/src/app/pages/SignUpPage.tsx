@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch } from '../../features/store'
+import { signUp } from '../../features/thunks/SignUpThunk'
 
 interface SignUpForm {
   username: string;
@@ -8,15 +11,31 @@ interface SignUpForm {
 }
 
 export default function SignUpPage() {
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate(); 
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<SignUpForm>({
     username: '',
     email: '',
     password: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle signup logic here
+    setError(null);
+    setIsLoading(true);
+
+    try {
+        await dispatch(signUp(formData)).unwrap();
+        navigate('/account')
+
+    } catch (err) {
+        setError(typeof err === 'string' ? err : 'Registration failed');
+    } finally {
+        setIsLoading(false);
+      }
+
     console.log('Signup attempted:', formData);
   };
 

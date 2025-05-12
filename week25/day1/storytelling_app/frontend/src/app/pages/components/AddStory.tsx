@@ -24,7 +24,7 @@ export default function AddStory() {
   };
 
   return (
-    <div className="p-2 w-full">
+    <div className="p-2 w-full z-0">
       <form onSubmit={handleSubmit} className="card max-w-3xl mx-auto bg-base-100 shadow-sm w-full">
         <div className="card-body p-4 space-y-2">
           <h2 className="text-xl font-bold">New Story</h2>

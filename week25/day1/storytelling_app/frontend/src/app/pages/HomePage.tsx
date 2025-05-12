@@ -9,10 +9,10 @@ export default function HomePage() {
           <input className="btn" type="radio" name="frameworks" aria-label="My stories"/>
           <input className="btn" type="radio" name="frameworks" aria-label="All"/>
         </form>
-        <Feed/>
-      </div>
-      <div className="w-1/3">
-        <AddStory/>
+        <div className="flex">
+          <Feed/>
+          <AddStory/>
+        </div>
       </div>
     </div>
   )
