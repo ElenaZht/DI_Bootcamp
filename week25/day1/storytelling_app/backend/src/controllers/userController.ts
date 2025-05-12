@@ -26,11 +26,11 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         const refreshToken = generateRefreshToken(user.id, user.username);
 
         // Set cookies only after successful user creation
-        res.cookie('accessToken', accessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 1000, // 1 hour
-        });
+        // res.cookie('accessToken', accessToken, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === 'production',
+        //     maxAge: 60 * 60 * 1000, // 1 hour
+        // });
         
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -38,7 +38,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'User registered successfully', accessToken });
         
     } catch (error: any) {
         console.error('Registration error:', error);
@@ -78,11 +78,11 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         const newRefreshToken = generateRefreshToken(user.id!, user.username);
 
         // Update cookies with new tokens
-        res.cookie('accessToken', newAccessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 1000, // 1 hour
-        });
+        // res.cookie('accessToken', newAccessToken, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === 'production',
+        //     maxAge: 60 * 60 * 1000, // 1 hour
+        // });
         res.cookie('refreshToken', newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
@@ -122,5 +122,22 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
     } catch (error) {
         console.error('Error refreshing token:', error);
         res.status(403).json({ message: 'Invalid or expired refresh token.' });
+    }
+};
+
+export const logoutUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+        // Clear the refresh token cookie
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            path: '/'
+        });
+        
+        res.status(200).json({ message: 'Logged out successfully' });
+        
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.status(500).json({ message: 'Error during logout' });
     }
 };
