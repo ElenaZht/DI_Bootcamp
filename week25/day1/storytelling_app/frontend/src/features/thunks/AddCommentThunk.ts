@@ -2,8 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 import type { RootState } from "../store";
 import type {Comment, AddCommentPayload} from '../../../../types/StoryTypes'
-
-const BASE_URL = process.env.REACT_APP_HOST_DOMAIN;
+import {BASE_URL} from '../../utils/config'
 
 export const addComment = createAsyncThunk<
     Comment,

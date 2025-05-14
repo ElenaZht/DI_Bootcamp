@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 import type { User } from '../../../../types/UserTypes';
+import {BASE_URL} from '../../utils/config'
 
 
 export const getUserById = createAsyncThunk(
@@ -10,7 +11,7 @@ export const getUserById = createAsyncThunk(
             const accessToken = getState().user.token;
             
 
-            const response = await authenticatedFetch(`http://localhost:3001/api/user/${userId}`, accessToken);
+            const response = await authenticatedFetch(`${BASE_URL}/api/user/${userId}`, accessToken);
             if (!response.ok) {
                 throw new Error('Failed to fetch user');
             }

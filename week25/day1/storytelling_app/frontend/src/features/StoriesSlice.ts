@@ -3,13 +3,15 @@ import type {Story, StoriesState} from '../../../types/StoryTypes'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../utils/apiClient';
 import { addNewStory } from './thunks/AddStoryThunk';
+import {BASE_URL} from '../utils/config'
+
 
 export const getAllStories = createAsyncThunk(
     'stories/getAll',
     async (_, { getState, rejectWithValue }) => {
         try {
             const accessToken = getState().user.token;
-            const response = await authenticatedFetch('http://localhost:3001/api/stories', accessToken);
+            const response = await authenticatedFetch(`${BASE_URL}/api/stories`, accessToken);
             if (!response.ok) {
                 throw new Error('Failed to fetch stories');
             }

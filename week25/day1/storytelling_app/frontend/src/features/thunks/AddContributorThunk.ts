@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import {BASE_URL} from '../../utils/config'
 
 
 export const addContributor = createAsyncThunk(
@@ -10,7 +11,7 @@ export const addContributor = createAsyncThunk(
             const {user_id, story_id, user} = data
             console.log("data add contr", data)
             const accessToken = getState().user.token;
-            const response = await authenticatedFetch('http://localhost:3001/api/contributors', accessToken, {
+            const response = await authenticatedFetch(`${BASE_URL}/api/contributors`, accessToken, {
                 method: 'POST',
                 body: JSON.stringify(data)
             });

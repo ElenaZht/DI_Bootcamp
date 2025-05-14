@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import {BASE_URL} from '../../utils/config'
 
 
 export const editStory = createAsyncThunk(
@@ -10,7 +11,7 @@ export const editStory = createAsyncThunk(
             const storyData = data.story
             console.log("edit story_id", story_id)
             const accessToken = getState().user.token;
-            const response = await authenticatedFetch(`http://localhost:3001/api/stories/${story_id}`, accessToken, {
+            const response = await authenticatedFetch(`${BASE_URL}/api/stories/${story_id}`, accessToken, {
                 method: 'PATCH',
                 body: JSON.stringify(storyData)
             });

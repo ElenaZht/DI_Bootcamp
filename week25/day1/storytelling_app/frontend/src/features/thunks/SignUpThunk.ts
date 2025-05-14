@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type {SignUpCredentials, SignUpResponse} from '../../../../types/UserTypes'
+import {BASE_URL} from '../../utils/config'
 
 interface BackendValidationError {
     type: string;
@@ -21,7 +22,7 @@ export const signUp = createAsyncThunk<
     'user/register',
     async (credentials: SignUpCredentials, { rejectWithValue }) => {
         try {
-            const response = await fetch('http://localhost:3001/api/user/register', {
+            const response = await fetch(`${BASE_URL}/api/user/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

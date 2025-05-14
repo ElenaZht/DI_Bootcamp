@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { RefreshResponse } from "../../../../types/UserTypes";
+import {BASE_URL} from '../../utils/config'
 
 
 export const refreshToken = createAsyncThunk(
     "user/refresh-token",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await fetch('http://localhost:3001/api/user/refresh-token', {
+            const response = await fetch(`${BASE_URL}/api/user/refresh-token`, {
                 method: 'GET',
                 credentials: 'include', // needed for cookies
                 headers: {

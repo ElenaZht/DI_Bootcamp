@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 import type { Contributor } from '../../../../types/ContributorTypes';
+import {BASE_URL} from '../../utils/config'
 
 
 export const getStoryContributors = createAsyncThunk(
@@ -9,7 +10,7 @@ export const getStoryContributors = createAsyncThunk(
         try {
             
             const accessToken: string = getState().user.token;
-            const response = await authenticatedFetch(`http://localhost:3001/api/contributors/${storyId}`, accessToken);
+            const response = await authenticatedFetch(`${BASE_URL}/api/contributors/${storyId}`, accessToken);
             
             if (!response.ok) {
                 throw new Error('Failed to fetch contributors');

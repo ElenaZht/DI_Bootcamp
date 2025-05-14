@@ -1,12 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { logout } from "../UserSlice";
+import {BASE_URL} from '../../utils/config'
 
 
 export const logoutUser = createAsyncThunk(
     'user/logout',
     async (_, { dispatch }) => {
         try {
-            const response = await fetch('http://localhost:3001/api/user/logout', {
+            const response = await fetch(`${BASE_URL}/api/user/logout`, {
                 method: 'POST',
                 credentials: 'include',
             });

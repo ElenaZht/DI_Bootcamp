@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import {BASE_URL} from '../../utils/config'
 
 
 export const deleteStory = createAsyncThunk(
@@ -7,7 +8,7 @@ export const deleteStory = createAsyncThunk(
     async (id: string, { getState, rejectWithValue }) => {
        try {
         const accessToken = getState().user.token;
-        const response = await authenticatedFetch(`http://localhost:3001/api/stories/${id}`, accessToken, {
+        const response = await authenticatedFetch(`${BASE_URL}/api/stories/${id}`, accessToken, {
             method: 'DELETE',
         });
 

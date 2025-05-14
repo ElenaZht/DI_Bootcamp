@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import {BASE_URL} from '../../utils/config'
 
 
 export const deleteContributor = createAsyncThunk(
@@ -7,7 +8,7 @@ export const deleteContributor = createAsyncThunk(
     async (contributor_id, { getState, rejectWithValue }) => {
         try {
             const accessToken = getState().user.token;
-            const response = await authenticatedFetch(`http://localhost:3001/api/contributors/${contributor_id}`, accessToken, {
+            const response = await authenticatedFetch(`${BASE_URL}/api/contributors/${contributor_id}`, accessToken, {
                 method: 'DELETE',
             });
             if (!response.ok) {

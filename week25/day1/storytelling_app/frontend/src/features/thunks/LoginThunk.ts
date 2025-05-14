@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type {LoginCredentials} from '../../../../types/UserTypes'
-const BASE_URL = process.env.REACT_APP_HOST_DOMAIN;
+import {BASE_URL} from '../../utils/config'
 
 
 export const loginUser = createAsyncThunk(
