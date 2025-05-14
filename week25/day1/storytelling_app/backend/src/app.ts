@@ -19,6 +19,7 @@ app.use(cors({
     origin: process.env.ALLOWED_DOMAIN, // frontend URL
     credentials: true
 }));
+console.log("lena cors", process.env.ALLOWED_DOMAIN)
 app.use(morgan('combined'))
 app.use('/api/user', userRouter)
 app.use('/api/stories', storyRouter)
