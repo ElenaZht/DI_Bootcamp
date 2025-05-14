@@ -3,6 +3,7 @@ import { authenticatedFetch } from '../../utils/apiClient';
 import type { RootState } from "../store";
 import type {Comment, AddCommentPayload} from '../../../../types/StoryTypes'
 
+const BASE_URL = process.env.REACT_APP_HOST_DOMAIN;
 
 export const addComment = createAsyncThunk<
     Comment,
@@ -14,7 +15,7 @@ export const addComment = createAsyncThunk<
         try {
             const accessToken = getState().user.token;
             const response = await authenticatedFetch(
-                `http://localhost:3001/api/stories/${story_id}/comments`, 
+                `${BASE_URL}/api/stories/${story_id}/comments`, 
                 accessToken, 
                 {
                     method: 'POST',
