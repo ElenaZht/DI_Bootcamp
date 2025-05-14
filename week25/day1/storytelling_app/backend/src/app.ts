@@ -16,7 +16,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.ALLOWED_DOMAIN, // frontend URL
+    origin: 'https://storytelling-frontend-wmpd.onrender.com',//process.env.ALLOWED_DOMAIN, // frontend URL
     credentials: true
 }));
 
@@ -32,6 +32,5 @@ app.listen(port, (err) => {
         console.log(err)
         return
     }
-    console.log('server is running on port ', port, process.env.ALLOWED_DOMAIN)
-    console.info("lena cors", process.env.ALLOWED_DOMAIN)
+    console.log('server is running on port ', port)
 })
