@@ -1,10 +1,22 @@
 import { retryFailedRequest } from './authUtils';
+// import { store } from '../features/store';
 
-export const authenticatedFetch = async (url: string, options: RequestInit = {}) => {
+
+
+export const authenticatedFetch = async (url: string, accessToken: string, options: RequestInit = {}) => {
     try {
+        // const accessToken = store.getState().user.token;
+        // console.log("access token", accessToken);
+        
+        // Create headers with the JWT token
+        const headers = {
+            ...options.headers,
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+        };
         const response = await fetch(url, {
             ...options,
-            credentials: 'include',
+            headers
         });
 
         // If token expired (401), try to refresh and retry

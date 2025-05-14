@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../features/thunks/LoginThunk'
 import type { AppDispatch } from '../../features/store'
+import { setUser } from '../../features/UserSlice'
 
 interface LoginForm {
   email: string;
@@ -27,7 +28,8 @@ export default function LogInPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-        await dispatch(loginUser(formData)).unwrap();
+        const response = await dispatch(loginUser(formData)).unwrap();
+        await dispatch(setUser(response.user));
         navigate('/');
 
     } catch (err) {
@@ -44,7 +46,6 @@ export default function LogInPage() {
       ...formData,
       [e.target.name]: e.target.value
     });
-    console.log(formData)
   };
 
   return (

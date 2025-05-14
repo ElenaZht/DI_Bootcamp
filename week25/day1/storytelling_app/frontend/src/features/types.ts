@@ -2,9 +2,8 @@ export interface User {
     id: string;
     username: string;
     email: string;
-    password_hash: string;
-    stories?: Story[];
-    contributedStories?: Story[];
+    password_hash?: string;
+
 }
 
 export interface UserState {
@@ -23,6 +22,7 @@ export interface Story {
     author_id: string;
     author: User;
     contributors?: User[];
+    created_at: string;
 }
 export interface StoriesState {
     items: Story[];
@@ -37,4 +37,9 @@ export interface Contributor {
     user_id: string;
     user?: User;
     story?: Story;
+}
+export interface RefreshResponse {
+    message: string;
+    accessToken: string;
+    user_id: string;
 }

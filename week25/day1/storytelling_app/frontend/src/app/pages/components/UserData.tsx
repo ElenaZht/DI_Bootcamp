@@ -1,6 +1,29 @@
-import React from 'react'
+import type { AppDispatch, RootState } from '../../../features/store';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../../../features/thunks/LogoutThunk';
+import { setUser } from '../../../features/UserSlice';
 
-export default function UserData() {
+
+export default function UserData () {
+    const { currentUser } = useSelector((state: RootState) => state.user);
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+    
+    const handleLogout = async () => {
+        try {
+            await dispatch(logoutUser()).unwrap();
+            dispatch(setUser(null));
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+    };
+
+    // useEffect(() => {
+    //     console.log("cur user USERDATA", currentUser)
+    // }, [currentUser])
   return (
     <>
         <div className="card card-side bg-base-100 shadow-sm w-fit h-fit m-4 flex flex-col gap-2">
@@ -11,12 +34,11 @@ export default function UserData() {
                 alt="User photo" />
             </figure>
             <div className="card-body flex flex-col gap-2">
-                <h2 className="card-title text-left">John Joe</h2>
-                <p className='text-left'>On platform since 30 jan 2020</p>
-                <p className='text-left'>own stories: 20</p>
-                <p className='text-left'>contributed: 4</p>
+                <h2 className="card-title text-left">{currentUser?.username}</h2>
+                <p className='text-left'>{currentUser?.email}</p>
                 <div className="card-actions">
-                    <button className="btn btn-primary">Change user</button>
+                    <button className="btn btn-primary"
+                    onClick={handleLogout}>Change user</button>
                 </div>
             </div>
         </div>

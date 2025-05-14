@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-interface RefreshResponse {
-    accessToken: string;
-    message: string;
-}
+import type { RefreshResponse } from "../types";
+// interface RefreshResponse {
+//     accessToken: string;
+//     message: string;
+// }
 
 export const refreshToken = createAsyncThunk(
     "user/refresh-token",
@@ -20,9 +20,11 @@ export const refreshToken = createAsyncThunk(
             if (!response.ok) {
                 throw new Error('Token refresh failed');
             }
+            const data = await response.json();
+            // console.log('Refresh token API response:', data); // Debug log
+      
+            return data as RefreshResponse;
 
-            const data: RefreshResponse = await response.json();
-            return data;
         } catch (error: any) {
             return rejectWithValue(error.message);
         }

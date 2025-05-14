@@ -25,7 +25,7 @@ export const loginUser = createAsyncThunk(
                 credentials: 'include',
                 body: JSON.stringify(credentials),
             });
-            console.log("response", response)
+            console.log("logine response", response)
             if (!response.ok) {
                 throw new Error('Login failed');
             }

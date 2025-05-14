@@ -5,8 +5,8 @@ import userReducer from './UserSlice'
 
 export const store = configureStore({
   reducer: {
-    stories: storiesReducer,
     user: userReducer,
+    stories: storiesReducer,
   },
 });
 

@@ -1,19 +1,47 @@
 import Feed from "./components/Feed"
 import AddStory from "./components/AddStory"
+import { useState } from "react";
+
+type FilterType = 'all' | 'my';
 
 export default function HomePage() {
+  const [filter, setFilter] = useState<FilterType>('all');
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value as FilterType);
+  };
+
   return (
     <div className="flex gap-4 p-4">
       <div className="flex-1">
-        <form className="filter mb-4">
-          <input className="btn" type="radio" name="frameworks" aria-label="My stories"/>
-          <input className="btn" type="radio" name="frameworks" aria-label="All"/>
-        </form>
         <div className="flex">
-          <Feed/>
-          <AddStory/>
+          <div className="join mb-4 w-full">
+            <input 
+              id="all"
+              type="radio" 
+              name="filter"
+              value="all"
+              className="join-item btn"
+              checked={filter === 'all'}
+              onChange={handleFilterChange}
+            />
+            <label htmlFor="all" className="join-item btn">All Stories</label>
+            
+            <input 
+              id="my"
+              type="radio" 
+              name="filter"
+              value="my"
+              className="join-item btn"
+              checked={filter === 'my'}
+              onChange={handleFilterChange}
+            />
+            <label htmlFor="my" className="join-item btn">My Stories</label>
+          </div>
+          <Feed filter={filter} />
+          <AddStory />
         </div>
       </div>
     </div>
-  )
+  );
 }
