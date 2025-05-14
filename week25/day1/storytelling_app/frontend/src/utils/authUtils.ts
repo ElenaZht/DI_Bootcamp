@@ -21,7 +21,7 @@ export const retryFailedRequest = async (originalRequest: RequestConfig, dispatc
             const retryResponse = await fetch(originalRequest.url, {
                 ...originalRequest,
                 headers,
-                credentials: 'include'
+                // credentials: 'include'
             });
 
             return retryResponse;
