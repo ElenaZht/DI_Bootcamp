@@ -1,20 +1,26 @@
 import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import userRouter from './routes/userRouter';
 import storyRouter from './routes/storyRouter';
 import contributorRouter from './routes/contributorRouter'
-// import cors from 'cors';
-import morgan from 'morgan';
+
+
 
 
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
 });
-const cors = require("cors");
+// const cors = require("cors");
 
 const app = express()
+
+app.use(morgan('combined'))
+
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
@@ -24,7 +30,7 @@ app.use(cookieParser());
 //     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
 // }));
 
-app.use(morgan('combined'))
+
 app.use('/api/user', userRouter)
 app.use('/api/stories', storyRouter)
 app.use('/api/contributors', contributorRouter)
