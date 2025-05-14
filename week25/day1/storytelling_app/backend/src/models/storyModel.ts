@@ -5,6 +5,7 @@ export interface Story {
     title: string;
     content: string;
     author_id: string;
+    created_at: string;
 }
 
 export const getAllStories = async (): Promise<Story[]> => {
@@ -12,6 +13,7 @@ export const getAllStories = async (): Promise<Story[]> => {
         // Fetch all records from the "stories" table
         const stories = await db<Story>('stories').select('*');
         return stories;
+        
     } catch (error) {
         console.error('Error fetching stories:', error);
         throw error; // Re-throw the error to handle it in the calling function
@@ -43,8 +45,9 @@ export const createStory = async (title: string, content: string, user_id: strin
                 content: content,
                 author_id: user_id,
             })
-            .returning(['id', 'title', 'content', 'author_id']);
+            .returning(['id', 'title', 'content', 'author_id', 'created_at']);
         return newStory;
+
     } catch (error) {
         console.error('Error creating story:', error);
         throw error;

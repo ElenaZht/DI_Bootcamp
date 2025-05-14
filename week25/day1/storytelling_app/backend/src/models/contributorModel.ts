@@ -47,9 +47,15 @@ export const getStoryContributorsList = async (story_id: string): Promise<Contri
             throw Error("Story not found model");
         }
         // Get all contributors for this story
-        const contributors = await db<Contributor>('contributors')
-        .select('*')
-        .where('story_id', '=', story_id);
+        const contributors = await db('contributors')
+            .select(
+                'contributors.id',
+                'contributors.story_id',
+                'contributors.user_id',
+                'users.username' // Select username from users table
+            )
+            .where('contributors.story_id', '=', story_id)
+            .leftJoin('users', 'contributors.user_id', 'users.id');
 
 
         
@@ -76,7 +82,7 @@ export const deleteContributorFromTheStory  = async (contributor_id: string): Pr
             .where({ id: contributor_id })
             .del()
             .returning(['id', 'story_id', 'user_id']);
-
+        console.log("deleteContributorFromTheStory model", deleted)
         if (!deleted) {
             throw Error("Contributor not found");
         }

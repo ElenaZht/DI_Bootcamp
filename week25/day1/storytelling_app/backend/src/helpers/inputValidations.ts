@@ -74,3 +74,13 @@ export const validateUsername: ValidateArray = [
     commonValidations.username(),
     handleValidationErrors
 ];
+
+// validation for comments
+export const validateCommentContent: ValidateArray = [
+    body('content')
+        .trim()
+        .escape()
+        .isLength({ min: 1, max: 1000 }) // Changed min to 1 (or whatever minimum you want)
+        .withMessage('Comment content must be between 1 and 1000 characters.'),
+    handleValidationErrors
+];

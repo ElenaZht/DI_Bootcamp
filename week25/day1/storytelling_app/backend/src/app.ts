@@ -4,7 +4,7 @@ import userRouter from './routes/userRouter';
 import storyRouter from './routes/storyRouter';
 import contributorRouter from './routes/contributorRouter'
 import cors from 'cors';
-
+import morgan from 'morgan';
 
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
@@ -18,6 +18,7 @@ app.use(cors({
     origin: 'http://localhost:5173', // frontend URL
     credentials: true
 }));
+app.use(morgan('combined'))
 app.use('/api/user', userRouter)
 app.use('/api/stories', storyRouter)
 app.use('/api/contributors', contributorRouter)

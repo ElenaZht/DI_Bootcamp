@@ -14,15 +14,16 @@ declare global {
 
 
 export const authenticate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const token = req.cookies?.accessToken;
-
-    if (!token) {
-        res.status(401).json({ message: 'Access token is missing.' });
-        return 
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        res.status(401).json({ message: 'Authorization header is missing or malformed.' });
+        return;
     }
 
+    const token = authHeader.split(' ')[1];
+
     try {
-        const decoded = await verifyToken(token);
+        const decoded = await verifyToken(token) as { id: string; username: string };
         req.user = decoded; // Attach decoded user info to the request object with a specific type
         next(); // Proceed to the next middleware or route handler
     } catch (error) {

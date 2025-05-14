@@ -63,7 +63,7 @@ export const getAllStoryContributor = async (req: Request, res: Response): Promi
 
         const storyContributors = await getStoryContributorsList(story_id)
         if (!storyContributors || storyContributors.length == 0){
-            res.status(404).json({message: "Story has no contributors yet."})
+            res.status(200).json({contributors: []})
             return
         }
 
@@ -78,7 +78,7 @@ export const getAllStoryContributor = async (req: Request, res: Response): Promi
 
 export const deleteContributor = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {contributor_id} = req.body;
+        const contributor_id = req.params.id;
 
         if (!contributor_id) {
             res.status(400).json({ message: 'Contributor id is required' });
@@ -87,6 +87,8 @@ export const deleteContributor = async (req: Request, res: Response): Promise<vo
 
         //delete contributor from db
         const deleted = await deleteContributorFromTheStory(contributor_id)
+        console.log("deleteContributorFromTheStory controller", deleted)
+
         if (!deleted){
             res.status(404).json({message: "Contributor not found"})
             return

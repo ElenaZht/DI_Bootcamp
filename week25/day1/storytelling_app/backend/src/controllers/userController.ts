@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken, verifyToken } from '../helpers/jwt_helper';
-import { createUser, getUserByEmail } from '../models/userModel';
+import { createUser, getUserByEmail, getUserById, getAllUsersFromDB } from '../models/userModel';
+import { getAllStories } from '../models/storyModel';
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     const { password, email, username } = req.body;
@@ -89,7 +90,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        res.status(200).json({ message: 'Login successfully', newAccessToken });
+        res.status(200).json({ message: 'Login successfully', newAccessToken, user });
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -111,14 +112,9 @@ export const refreshToken = async (req: Request, res: Response): Promise<void> =
         // Generate a new access token
         const newAccessToken = generateAccessToken(decoded.id, decoded.username);
 
-        // Update the access token cookie
-        res.cookie('accessToken', newAccessToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 1000, // 1 hour
-        });
 
-        res.status(200).json({ message: 'Access token refreshed successfully', accessToken: newAccessToken });
+
+        res.status(200).json({ message: 'Access token refreshed successfully', accessToken: newAccessToken, user_id: decoded.id });
     } catch (error) {
         console.error('Error refreshing token:', error);
         res.status(403).json({ message: 'Invalid or expired refresh token.' });
@@ -135,9 +131,40 @@ export const logoutUser = async (req: Request, res: Response): Promise<void> => 
         });
         
         res.status(200).json({ message: 'Logged out successfully' });
-        
+
     } catch (error) {
         console.error('Logout error:', error);
         res.status(500).json({ message: 'Error during logout' });
     }
 };
+
+export const getUserInfo = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const userId = req.params.id;
+        
+        const user = await getUserById(userId);
+        if (!user) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+
+        res.status(200).json({user});
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.status(500).json({ message: 'Failed to fetch user information' });
+    }
+};
+
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const allUsers = await getAllUsersFromDB()
+        if (allUsers.length > 0){
+            res.status(200).json({allUsers})
+            return 
+        }
+        res.status(404).json({message: "Users not found."})
+
+    } catch (error) {
+        console.log("Failed to fetch all users.")
+    }
+}

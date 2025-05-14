@@ -1,14 +1,29 @@
 import { Request, Response } from 'express';
-import { createStory, getAllStories, editStoryOnDB, removeStoryFromDB } from '../models/storyModel';
+import { 
+    createStory, 
+    getAllStories, 
+    editStoryOnDB, 
+    removeStoryFromDB, 
+} from '../models/storyModel';
+import { getStoryCommentsById, addCommentToStory } from '../models/userModel';
 
 
 export interface User {
-    id?: string;
+    id: string;
     username: string;
     email: string;
-    password_hash: string;
+    password_hash?: string;
 
 }
+
+interface Comment {
+    id: string;
+    story_id: string;
+    user_id: string;
+    username?: string;
+    content: string;
+    created_at: string;
+  }
 declare global {
     namespace Express {
         interface Request {
@@ -127,5 +142,52 @@ export const deleteStory = async (req: Request, res: Response): Promise<void> =>
         // if nod deleted - 500
         res.status(500).json({message: "Internal server error, story not deleted"})
     }
+
+}
+
+export const getStoryComments = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const story_id = req.params.id
+        if (!story_id) {
+            res.status(400).json({ message: "Story ID is required." });
+            return;
+        }
+        const comments = await getStoryCommentsById(story_id)
+        res.status(200).json({comments})
+        
+    } catch (error: any) {
+        console.error("Error in getStoryComments controller:", error); // Changed to console.error and more specific log
+        res.status(500).json({ 
+            message: error.message || "An unexpected error occurred while fetching comments." 
+        });
+    }
+}
+
+export const addComment = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const story_id = req.params.id
+        const {content} = req.body
+        const user_id = req.user?.id;
+
+        if (!story_id){
+            res.status(400).json({ message: "Story ID is required." });
+            return;
+        }
+        if (!user_id) {
+            res.status(401).json({ message: "User not authenticated." });
+            return;
+        }
+        await addCommentToStory(user_id, story_id, content)
+        res.status(201).json({ message: "Comment added successfully" });
+
+
+    } catch (error: any) {
+        console.error("Failed to fetch comments:", error);
+        res.status(500).json({ 
+            message: error.message || "An unexpected error occurred while fetching comments."
+        });
+    }
+
+
 
 }

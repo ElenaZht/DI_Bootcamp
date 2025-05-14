@@ -7,6 +7,7 @@ export interface Story {
     title: string;
     content: string;
     author_id: string;
+    created_at: string;
 }
 
 export const isAuthor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -128,5 +129,54 @@ export const isAuthorOrColaborator = async  (req: Request, res: Response, next: 
     } catch (error) {
         console.error('Error in isAuthorOrColaborator middleware:', error);
         res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export const canManageContributors = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+        const user = req.user;
+        if (!user || !user.id) {
+            res.status(401).json({ message: "Authentication required." });
+            return
+        
+        }
+        
+        const contributor_id = req.params.id
+        if (!contributor_id){
+            res.status(400).json({message: "Contributor id is required.", contributor_id})
+            return
+        }
+        
+
+        // check for user an author
+        const contributor = await db('contributors')
+        .where({ id: contributor_id })
+        .first();
+        
+        if (!contributor){
+            res.status(404).json({ message: "Contributor not found." });
+            return;
+        }
+        const story = await db<Story>('stories')
+            .where({ id: contributor.story_id })
+            .first();
+
+        console.log("user", user, "contributor_id", contributor_id, "story", story)
+
+        if (!story) {
+            res.status(404).json({ message: "Associated story not found." });
+            return;
+        }
+
+        if (story.author_id !== user.id) {
+            res.status(403).json({ message: "Access denied. You are not the author of this story." });
+            return;
+        }
+        console.log("dima2: ", contributor_id)
+        next();
+        
+    } catch (error) {
+        console.error('Error in canManageContributors middleware:', error);
+        res.status(500).json({ message: "Internal server error while checking permissions." });
     }
 }
