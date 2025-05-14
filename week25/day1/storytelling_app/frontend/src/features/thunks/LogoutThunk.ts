@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { logout } from "../UserSlice";
 
+
 export const logoutUser = createAsyncThunk(
     'user/logout',
     async (_, { dispatch }) => {

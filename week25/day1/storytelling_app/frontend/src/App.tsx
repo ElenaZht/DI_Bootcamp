@@ -7,36 +7,9 @@ import SignUpPage from './app/pages/SignUpPage'
 import AccountPage from './app/pages/AccountPage'
 import StoryViewer from './app/pages/StoryViewer'
 import AddStory from './app/pages/components/AddStory'
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import type { AppDispatch } from './features/store';
-import { refreshToken } from './features/thunks/RefreshToken';
-import { setUser } from './features/UserSlice'
-import { getUserById } from './features/thunks/GetUserByIdThunk'
-import { getAllStories } from './features/StoriesSlice'
 
 
 function App() {
-  // const dispatch = useDispatch<AppDispatch>();
-
-  // useEffect(() => {
-  //   const tryRefreshToken = async () => {
-  //     try {
-  //       const result = await dispatch(refreshToken()).unwrap();
-  //       if (result.user_id) {
-  //         const userData = await dispatch(getUserById(result.user_id)).unwrap();
-  //         console.log("set user as", userData)
-  //         dispatch(setUser(userData));
-  //         dispatch(getAllStories())
-  //       }
-  //     } catch (err) {
-  //       console.error('Failed to refresh token:', err);
-        
-  //     }
-  //   };
-
-  //   tryRefreshToken();
-  // }, [dispatch]);
   
   return (
     <>

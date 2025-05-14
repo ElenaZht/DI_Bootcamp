@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
-import type { Contributor } from '../types';
+import type { Contributor } from '../../../../types/ContributorTypes';
+
 
 export const getStoryContributors = createAsyncThunk(
     'stories/getContributors',
@@ -14,7 +15,6 @@ export const getStoryContributors = createAsyncThunk(
             }
             
             const data = await response.json();
-            // console.log("fetch contributors", data)
             return data.contributors as Contributor[];
         } catch (error: any) {
             return rejectWithValue(error.message);

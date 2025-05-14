@@ -2,14 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 
 
-interface Story {
-    title: string;
-    content: string;
-}
-
 export const editStory = createAsyncThunk(
     'stories/edit',
-    // async (story_id: string, storyData: Story, { getState, rejectWithValue }) => {
     async (data, { getState, rejectWithValue }) => {
     try {
             const story_id = data.id

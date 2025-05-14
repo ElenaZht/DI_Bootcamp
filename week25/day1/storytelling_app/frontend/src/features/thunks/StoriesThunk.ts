@@ -1,16 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import type { Story } from "../../../../types/StoryTypes";
 
-interface Story {
-    id: string;
-    title: string;
-    content: string;
-    author_id: string;
-    created_at: string;
-}
 
 export const getAllStories = createAsyncThunk(
-    'stories/getAll',  // matches your API endpoint naming convention
+    'stories/getAll',
     async (_, { getState, rejectWithValue }) => {
         try {
             const accessToken = getState().user.token;

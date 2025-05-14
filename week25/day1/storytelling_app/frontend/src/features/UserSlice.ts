@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { User, UserState } from './types'
+import type { User, UserState } from '../../../types/UserTypes'
 import { loginUser } from "./thunks/LoginThunk";
 import { signUp } from './thunks/SignUpThunk'
 import { refreshToken } from './thunks/RefreshToken';
-import { getUserById } from './thunks/GetUserByIdThunk'
 
 
 const initialState: UserState = {
@@ -62,7 +61,6 @@ export const userSlice = createSlice({
 
         // Signup
         builder
-        // ...existing code...
             .addCase(signUp.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
@@ -88,7 +86,6 @@ export const userSlice = createSlice({
             .addCase(refreshToken.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.token = action.payload.accessToken;
-                // console.log("action.payload", action.payload)
                 state.isAuthenticated = true;
             })
             .addCase(refreshToken.rejected, (state) => {
@@ -97,22 +94,6 @@ export const userSlice = createSlice({
                 state.currentUser = null;
                 state.isAuthenticated = false;
             });
-
-            // Get user by ID
-            // builder
-            // .addCase(getUserById.pending, (state) => {
-            //     state.status = 'loading';
-            // })
-            // .addCase(getUserById.fulfilled, (state, action) => {
-            //     state.status = 'succeeded';
-            //     state.currentUser = action.payload;
-            //     state.isAuthenticated = true;
-            // })
-            // .addCase(getUserById.rejected, (state, action) => {
-            //     state.status = 'failed';
-            //     state.error = action.payload as string;
-            //     state.isAuthenticated = false;
-            // });
     }
 })
 

@@ -1,4 +1,3 @@
-// router.get('/:id/comments', authenticate, getStoryComments)
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 

@@ -1,12 +1,8 @@
 import { retryFailedRequest } from './authUtils';
-// import { store } from '../features/store';
-
 
 
 export const authenticatedFetch = async (url: string, accessToken: string, options: RequestInit = {}) => {
     try {
-        // const accessToken = store.getState().user.token;
-        // console.log("access token", accessToken);
         
         // Create headers with the JWT token
         const headers = {
@@ -35,30 +31,3 @@ export const authenticatedFetch = async (url: string, accessToken: string, optio
         throw error;
     }
 };
-
-//* code for thunks
-// - fetchStories (GET /api/stories)
-// - addNewStory (POST /api/stories)
-// - editStory (PATCH /api/stories/:id)
-// - deleteStory (DELETE /api/stories/:id)
-
-// - addContributor (POST /api/contributors)
-// - getContributors (GET /api/contributors/:story_id)
-// - deleteContributor (DELETE /api/contributors/:id)
-// import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { authenticatedFetch } from '../../utils/apiClient';
-
-// export const fetchUserStories = createAsyncThunk(
-//     'stories/fetchUserStories',
-//     async (_, { rejectWithValue }) => {
-//         try {
-//             const response = await authenticatedFetch('http://localhost:3001/api/stories');
-//             if (!response.ok) {
-//                 throw new Error('Failed to fetch stories');
-//             }
-//             return await response.json();
-//         } catch (error: any) {
-//             return rejectWithValue(error.message);
-//         }
-//     }
-// );

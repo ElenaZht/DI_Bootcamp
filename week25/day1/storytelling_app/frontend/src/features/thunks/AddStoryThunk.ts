@@ -1,11 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
+import type {NewStory} from '../../../../types/StoryTypes'
 
 
-interface NewStory {
-    title: string;
-    content: string;
-}
 
 export const addNewStory = createAsyncThunk(
     'stories/addNew',

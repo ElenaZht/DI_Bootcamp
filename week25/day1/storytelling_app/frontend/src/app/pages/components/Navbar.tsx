@@ -29,9 +29,6 @@ export default function Navbar() {
         console.log("isAuthenticated", isAuthenticated)
     }, [isAuthenticated])
 
-    // useEffect(() => {
-    //     console.log("cur user NAVBAR", currentUser)
-    // }, [currentUser])
 
     useEffect(() => {
         const tryRefreshToken = async () => {
@@ -39,9 +36,7 @@ export default function Navbar() {
             const result = await dispatch(refreshToken()).unwrap();
             if (result.user_id) {
               const userData = await dispatch(getUserById(result.user_id)).unwrap();
-            //   console.log("set user as", userData)
               dispatch(setUser(userData));
-            //   console.log("navbar get stories")
              dispatch(getAllStories())
             }
           } catch (err) {

@@ -86,7 +86,7 @@ export default function Comments({story_id}: CommentsProps) {
             const resultAction = await dispatch(addComment({
                 story_id: story_id,
                 content: newComment.trim()
-            })); // Added missing closing parenthesis and bracket here
+            }));
     
             if (addComment.fulfilled.match(resultAction)) {
                 setNewComment(''); // Clear the input field

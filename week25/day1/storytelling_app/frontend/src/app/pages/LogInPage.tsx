@@ -4,14 +4,8 @@ import { useDispatch } from 'react-redux'
 import { loginUser } from '../../features/thunks/LoginThunk'
 import type { AppDispatch } from '../../features/store'
 import { setUser } from '../../features/UserSlice'
+import type {LoginForm, LoginError} from '../../../../types/UserTypes'
 
-interface LoginForm {
-  email: string;
-  password: string;
-}
-interface LoginError {
-    message: string;
-}
 
 export default function LogInPage() {
     const dispatch = useDispatch<AppDispatch>();

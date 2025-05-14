@@ -3,12 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '../../features/store'
 import { signUp } from '../../features/thunks/SignUpThunk'
+import type {SignUpForm} from '../../../../types/UserTypes'
 
-interface SignUpForm {
-  username: string;
-  email: string;
-  password: string;
-}
 
 export default function SignUpPage() {
     const dispatch = useDispatch<AppDispatch>();

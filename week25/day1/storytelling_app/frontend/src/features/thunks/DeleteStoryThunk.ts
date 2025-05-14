@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../../utils/apiClient';
 
+
 export const deleteStory = createAsyncThunk(
     'story/delete',
     async (id: string, { getState, rejectWithValue }) => {

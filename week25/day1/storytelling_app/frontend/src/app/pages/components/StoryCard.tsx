@@ -14,7 +14,6 @@ interface StoryCardProps {
 }
 
 export default function StoryCard({ id, title, content, authorId, createdAt }: StoryCardProps) {
-    // const { username, isLoading, error } = useUsername(authorId);
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState('')
     const [authorInfo, setAuthorInfo] = useState(null)

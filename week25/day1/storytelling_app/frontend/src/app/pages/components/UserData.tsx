@@ -1,5 +1,5 @@
 import type { AppDispatch, RootState } from '../../../features/store';
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from '../../../features/thunks/LogoutThunk';
@@ -21,9 +21,7 @@ export default function UserData () {
         }
     };
 
-    // useEffect(() => {
-    //     console.log("cur user USERDATA", currentUser)
-    // }, [currentUser])
+
   return (
     <>
         <div className="card card-side bg-base-100 shadow-sm w-fit h-fit m-4 flex flex-col gap-2">

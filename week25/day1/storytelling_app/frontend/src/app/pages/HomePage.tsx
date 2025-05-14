@@ -1,8 +1,8 @@
 import Feed from "./components/Feed"
 import AddStory from "./components/AddStory"
 import { useState } from "react";
+import type {FilterType} from '../../../../types/StoryTypes'
 
-type FilterType = 'all' | 'my';
 
 export default function HomePage() {
   const [filter, setFilter] = useState<FilterType>('all');

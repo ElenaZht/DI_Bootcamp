@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type {Story, StoriesState} from './types'
+import type {Story, StoriesState} from '../../../types/StoryTypes'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../utils/apiClient';
 import { addNewStory } from './thunks/AddStoryThunk';
 
 
 export const getAllStories = createAsyncThunk(
-    'stories/getAll',  // matches your API endpoint naming convention
+    'stories/getAll',
     async (_, { getState, rejectWithValue }) => {
         try {
             const accessToken = getState().user.token;

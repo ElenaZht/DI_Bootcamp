@@ -1,36 +1,23 @@
-import { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "../../../features/store";
-import { getAllStories } from "../../../features/thunks/StoriesThunk";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../features/store";
 import StoryCard from "./StoryCard";
 import type { Story } from "../../../features/types";
+import type {FilterType} from '../../../../../types/StoryTypes'
 
-type FilterType = 'all' | 'my';
 
 interface FeedProps {
     filter: FilterType;
 }
 
 export default function Feed({filter}: FeedProps) {
-    const dispatch = useDispatch<AppDispatch>();
     const { currentUser, isAuthenticated } = useSelector((state: RootState) => state.user);
     const { items: stories, status, error } = useSelector((state: RootState) => state.stories);
 
     const [filteredAndSortedStories, setFilteredAndSortedStories] = useState([] as Story[])
-    // useEffect(() => {
-    //     console.log('Current auth state:', { 
-    //         currentUser,
-    //         isAuthenticated,
-    //         filter 
-    //     });
-    // }, [dispatch, filter]);
-    
-    // useEffect(() => {
-    //     if (isAuthenticated) dispatch(getAllStories());
-    // }, [isAuthenticated]);
+
 
     useMemo(() => {
-        // console.log("memo")
         // Handle case where user is not authenticated
         if (filter === 'my' && !isAuthenticated) {
             return [];

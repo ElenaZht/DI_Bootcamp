@@ -1,18 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import type {SignUpCredentials} from '../../../../types/UserTypes'
 
-interface SignUpCredentials {
-    username: string,
-    email: string;
-    password: string;
-}
-export interface SignUpResponse {
-    user: {
-        id: string;
-        email: string;
-        username: string;
-    };
-    token: string;
-}
 
 export const signUp = createAsyncThunk(
     'user/register',
