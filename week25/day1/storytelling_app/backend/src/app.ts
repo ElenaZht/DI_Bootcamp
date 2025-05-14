@@ -15,11 +15,13 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser());
-app.use(cors({
-    origin: process.env.ALLOWED_DOMAIN, // frontend URL
-    credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-}));
+app.use(cors());
+
+// app.use(cors({
+//     origin: process.env.ALLOWED_DOMAIN, // frontend URL
+//     credentials: true,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+// }));
 
 app.use(morgan('combined'))
 app.use('/api/user', userRouter)
