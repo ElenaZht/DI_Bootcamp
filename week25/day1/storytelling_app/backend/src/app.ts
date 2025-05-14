@@ -19,6 +19,11 @@ const app = express()
 app.use(morgan('combined'))
 
 app.use(cors());
+// app.use(cors({
+//     origin: process.env.ALLOWED_DOMAIN, // frontend URL
+//     credentials: true,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+// }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
