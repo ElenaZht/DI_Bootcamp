@@ -30,8 +30,14 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
             secure: process.env.NODE_ENV === 'production',
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
+        const { password_hash, ...publicUser } = user;
 
-        res.status(201).json({ message: 'User registered successfully', accessToken });
+
+        res.status(201).json({ 
+            message: 'User registered successfully', 
+            accessToken,
+            user: publicUser
+        });        
         
     } catch (error: any) {
         console.error('Registration error:', error);
@@ -76,8 +82,13 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
 
-        res.status(200).json({ message: 'Login successfully', newAccessToken, user });
-    } catch (error) {
+        const { password_hash, ...publicUser } = user;
+
+        res.status(200).json({ 
+            message: 'Login successfully', 
+            newAccessToken, 
+            user: publicUser
+        });    } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }

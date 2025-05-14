@@ -57,10 +57,16 @@ export const addNewStory = async (req: Request, res: Response): Promise<void> =>
 
         // Create story
         const newStory = await createStory(title, content, user.id);
-        res.status(201).json({ message: `Story ${newStory.title} created!` });
+        res.status(201).json({
+            message: `Story ${newStory.title} created!`,
+            story: newStory
+        });
+
     } catch (error) {
         console.error('Error creating story:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({
+            message: 'Internal Server Error' 
+        });
     }
 };
 
@@ -137,7 +143,7 @@ export const getStoryComments = async (req: Request, res: Response): Promise<voi
         res.status(200).json({comments})
         
     } catch (error: any) {
-        console.error("Error in getStoryComments controller:", error); // Changed to console.error and more specific log
+        console.error("Error in getStoryComments controller:", error); 
         res.status(500).json({ 
             message: error.message || "An unexpected error occurred while fetching comments." 
         });
