@@ -10,7 +10,6 @@ const addContributorToTheStory = async (story_id, user_id) => {
         if (!user_id) {
             throw Error('User id required');
         }
-        // Add new contributor
         await (0, db_1.db)('contributors').insert({
             story_id: story_id,
             user_id: user_id
@@ -36,8 +35,10 @@ const getStoryContributorsList = async (story_id) => {
         }
         // Get all contributors for this story
         const contributors = await (0, db_1.db)('contributors')
-            .select('*')
-            .where('story_id', '=', story_id);
+            .select('contributors.id', 'contributors.story_id', 'contributors.user_id', 'users.username' // Select username from users table
+        )
+            .where('contributors.story_id', '=', story_id)
+            .leftJoin('users', 'contributors.user_id', 'users.id');
         if (!contributors || contributors.length === 0) {
             return [];
         }
@@ -59,6 +60,7 @@ const deleteContributorFromTheStory = async (contributor_id) => {
             .where({ id: contributor_id })
             .del()
             .returning(['id', 'story_id', 'user_id']);
+        console.log("deleteContributorFromTheStory model", deleted);
         if (!deleted) {
             throw Error("Contributor not found");
         }

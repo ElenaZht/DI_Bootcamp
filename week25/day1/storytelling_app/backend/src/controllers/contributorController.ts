@@ -52,7 +52,7 @@ export const getAllStoryContributor = async (req: Request, res: Response): Promi
     try {
         const {story_id} = req.params
         if (!story_id){
-            res.status(403).json({message: "Story id required"})
+            res.status(400).json({message: "Story id required"})
             return
         }
 

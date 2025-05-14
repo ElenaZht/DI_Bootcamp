@@ -46,12 +46,12 @@ const getAllStoryContributor = async (req, res) => {
     try {
         const { story_id } = req.params;
         if (!story_id) {
-            res.status(403).json({ message: "Story id required" });
+            res.status(400).json({ message: "Story id required" });
             return;
         }
         const storyContributors = await (0, contributorModel_1.getStoryContributorsList)(story_id);
         if (!storyContributors || storyContributors.length == 0) {
-            res.status(404).json({ message: "Story has no contributors yet." });
+            res.status(200).json({ contributors: [] });
             return;
         }
         res.status(200).json({ contributors: storyContributors });
@@ -63,13 +63,14 @@ const getAllStoryContributor = async (req, res) => {
 exports.getAllStoryContributor = getAllStoryContributor;
 const deleteContributor = async (req, res) => {
     try {
-        const { contributor_id } = req.body;
+        const contributor_id = req.params.id;
         if (!contributor_id) {
             res.status(400).json({ message: 'Contributor id is required' });
             return;
         }
         //delete contributor from db
         const deleted = await (0, contributorModel_1.deleteContributorFromTheStory)(contributor_id);
+        console.log("deleteContributorFromTheStory controller", deleted);
         if (!deleted) {
             res.status(404).json({ message: "Contributor not found" });
             return;

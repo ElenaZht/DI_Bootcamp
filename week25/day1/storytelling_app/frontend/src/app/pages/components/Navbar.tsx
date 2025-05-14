@@ -25,10 +25,6 @@ export default function Navbar() {
             console.error('Logout failed:', error);
         }
     };  
-    useEffect(() => {
-        console.log("isAuthenticated", isAuthenticated)
-    }, [isAuthenticated])
-
 
     useEffect(() => {
         const tryRefreshToken = async () => {
@@ -45,6 +41,12 @@ export default function Navbar() {
           }
         };
         if (!isAuthenticated) tryRefreshToken();
+
+                // Cleanup function
+        return () => {
+            console.log("dima cleanup:", isAuthenticated)
+            // No specific cleanup needed for this effect
+        };
       }, [dispatch, isAuthenticated]);
 
   return (

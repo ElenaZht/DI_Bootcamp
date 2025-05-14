@@ -4,7 +4,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { authenticatedFetch } from '../utils/apiClient';
 import { addNewStory } from './thunks/AddStoryThunk';
 
-
 export const getAllStories = createAsyncThunk(
     'stories/getAll',
     async (_, { getState, rejectWithValue }) => {

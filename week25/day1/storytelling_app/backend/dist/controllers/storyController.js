@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteStory = exports.editStory = exports.addNewStory = exports.fetchStories = void 0;
+exports.addComment = exports.getStoryComments = exports.deleteStory = exports.editStory = exports.addNewStory = exports.fetchStories = void 0;
 const storyModel_1 = require("../models/storyModel");
+const userModel_1 = require("../models/userModel");
 const fetchStories = async (req, res) => {
     try {
         // Get stories from the database
@@ -37,11 +38,16 @@ const addNewStory = async (req, res) => {
         }
         // Create story
         const newStory = await (0, storyModel_1.createStory)(title, content, user.id);
-        res.status(201).json({ message: `Story ${newStory.title} created!` });
+        res.status(201).json({
+            message: `Story ${newStory.title} created!`,
+            story: newStory
+        });
     }
     catch (error) {
         console.error('Error creating story:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(500).json({
+            message: 'Internal Server Error'
+        });
     }
 };
 exports.addNewStory = addNewStory;
@@ -84,7 +90,6 @@ const deleteStory = async (req, res) => {
             res.status(400).json({ message: "Bad request." });
             return;
         }
-        //delete story
         const deltedStoryTitle = await (0, storyModel_1.removeStoryFromDB)(id);
         if (!deltedStoryTitle) {
             res.status(200).json({ message: "Story deleted." });
@@ -103,3 +108,45 @@ const deleteStory = async (req, res) => {
     }
 };
 exports.deleteStory = deleteStory;
+const getStoryComments = async (req, res) => {
+    try {
+        const story_id = req.params.id;
+        if (!story_id) {
+            res.status(400).json({ message: "Story ID is required." });
+            return;
+        }
+        const comments = await (0, userModel_1.getStoryCommentsById)(story_id);
+        res.status(200).json({ comments });
+    }
+    catch (error) {
+        console.error("Error in getStoryComments controller:", error);
+        res.status(500).json({
+            message: error.message || "An unexpected error occurred while fetching comments."
+        });
+    }
+};
+exports.getStoryComments = getStoryComments;
+const addComment = async (req, res) => {
+    try {
+        const story_id = req.params.id;
+        const { content } = req.body;
+        const user_id = req.user?.id;
+        if (!story_id) {
+            res.status(400).json({ message: "Story ID is required." });
+            return;
+        }
+        if (!user_id) {
+            res.status(401).json({ message: "User not authenticated." });
+            return;
+        }
+        await (0, userModel_1.addCommentToStory)(user_id, story_id, content);
+        res.status(201).json({ message: "Comment added successfully" });
+    }
+    catch (error) {
+        console.error("Failed to fetch comments:", error);
+        res.status(500).json({
+            message: error.message || "An unexpected error occurred while fetching comments."
+        });
+    }
+};
+exports.addComment = addComment;

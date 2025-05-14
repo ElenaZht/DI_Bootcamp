@@ -5,9 +5,10 @@ import type { Contributor } from '../../../../types/ContributorTypes';
 
 export const getStoryContributors = createAsyncThunk(
     'stories/getContributors',
-    async (storyId: string, { getState, rejectWithValue }) => {
+    async (storyId: string, { getState , rejectWithValue }) => {
         try {
-            const accessToken = getState().user.token;
+            
+            const accessToken: string = getState().user.token;
             const response = await authenticatedFetch(`http://localhost:3001/api/contributors/${storyId}`, accessToken);
             
             if (!response.ok) {

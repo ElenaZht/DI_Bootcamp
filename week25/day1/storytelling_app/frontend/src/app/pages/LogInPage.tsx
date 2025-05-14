@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { loginUser } from '../../features/thunks/LoginThunk'
 import type { AppDispatch } from '../../features/store'
-import { setUser } from '../../features/UserSlice'
 import type {LoginForm, LoginError} from '../../../../types/UserTypes'
 
 
@@ -25,8 +24,7 @@ export default function LogInPage() {
     setError(null);
     setSuccessMessage(null);
     try {
-        const response = await dispatch(loginUser(formData)).unwrap();
-        // await dispatch(setUser(response.user));
+        await dispatch(loginUser(formData)).unwrap();
         setSuccessMessage('Login successful! Redirecting...');
         setTimeout(() => {
           navigate('/');

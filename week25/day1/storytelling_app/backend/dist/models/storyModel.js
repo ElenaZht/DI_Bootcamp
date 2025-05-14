@@ -10,7 +10,7 @@ const getAllStories = async () => {
     }
     catch (error) {
         console.error('Error fetching stories:', error);
-        throw error; // Re-throw the error to handle it in the calling function
+        throw error;
     }
 };
 exports.getAllStories = getAllStories;
@@ -38,7 +38,7 @@ const createStory = async (title, content, user_id) => {
             content: content,
             author_id: user_id,
         })
-            .returning(['id', 'title', 'content', 'author_id']);
+            .returning(['id', 'title', 'content', 'author_id', 'created_at']);
         return newStory;
     }
     catch (error) {

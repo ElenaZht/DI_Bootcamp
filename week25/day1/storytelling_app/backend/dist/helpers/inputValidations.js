@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.validateUsername = exports.validateText = exports.validateLogin = exports.validateRegister = void 0;
+exports.validateCommentContent = exports.validateUsername = exports.validateText = exports.validateLogin = exports.validateRegister = void 0;
 const express_validator_1 = require("express-validator");
 // Common validation rules
 const commonValidations = {
@@ -61,5 +61,14 @@ exports.validateText = [
 // For single field validation if needed
 exports.validateUsername = [
     commonValidations.username(),
+    handleValidationErrors
+];
+// validation for comments
+exports.validateCommentContent = [
+    (0, express_validator_1.body)('content')
+        .trim()
+        .escape()
+        .isLength({ min: 1, max: 1000 }) // Changed min to 1 (or whatever minimum you want)
+        .withMessage('Comment content must be between 1 and 1000 characters.'),
     handleValidationErrors
 ];

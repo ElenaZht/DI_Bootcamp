@@ -1,7 +1,5 @@
-// import { refreshToken } from "../features/thunks/RefreshToken";
-// import { useDispatch } from 'react-redux';
-// import { setUser } from "../features/UserSlice";
-// import { getUserById } from "../features/thunks/GetUserByIdThunk";
+import { refreshToken } from "../features/thunks/RefreshToken";
+
 
 interface RequestConfig {
     url: string;
@@ -10,40 +8,24 @@ interface RequestConfig {
     body?: string;
 }
 
-export const retryFailedRequest = async (originalRequest: RequestConfig) => {
-    // const dispatch = useDispatch()
+export const retryFailedRequest = async (originalRequest: RequestConfig, dispatch: Function) => {
     try {
-        // // Request a new access token
-        // const refreshResponse = await fetch('http://localhost:3001/api/user/refresh-token', {
-        //     method: 'GET',
-        //     credentials: 'include',
-        // });
+        const result = await dispatch(refreshToken()).unwrap();
+         
+            const headers = {
+                ...originalRequest.headers,
+                'Authorization': `Bearer ${result.accessToken}`
+            };
 
-        // if (refreshResponse.ok) {
-        //     const { accessToken } = await refreshResponse.json();
-        // const result = await dispatch(refreshToken()).unwrap();
-        // console.log("retryFailedRequest: ", result)
-            // if (result.user_id) {
-            // const userData = await dispatch(getUserById(result.user_id)).unwrap();
-            // console.log("set user as", userData)
-            // dispatch(setUser(userData));
-            // }            // Update authorization header with new token
-            // const headers = {
-            //     ...originalRequest.headers,
-            //     'Authorization': `Bearer ${accessToken}`
-            // };
+            // Retry the original request with new token
+            const retryResponse = await fetch(originalRequest.url, {
+                ...originalRequest,
+                headers,
+                credentials: 'include'
+            });
 
-            // // Retry the original request with new token
-            // const retryResponse = await fetch(originalRequest.url, {
-            //     ...originalRequest,
-            //     headers,
-            //     credentials: 'include'
-            // });
-
-            // return retryResponse;
-        // } else {
-        //     throw new Error('Unable to refresh access token.');
-        // }
+            return retryResponse;
+    
     } catch (err) {
         console.error('Failed to retry request:', err);
         throw err;

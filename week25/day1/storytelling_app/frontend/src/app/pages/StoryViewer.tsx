@@ -12,14 +12,14 @@ import { getAllUsers } from '../../features/thunks/GetAllUsersThunk';
 import { deleteContributor } from '../../features/thunks/DeleteContributorThunk';
 import type { User } from '../../../../types/UserTypes';
 import Comments from './components/Comments'
-import type {StoryFormData} from '../../../../types/StoryTypes'
+import type {Story, StoryFormData} from '../../../../types/StoryTypes'
 
 
 export default function StoryViewer() {
   const { id } = useParams();
   const dispatch = useDispatch()
   const stories = useSelector((state: RootState) => state.stories.items)
-  const [currentStory, setCurrentStory] = useState(null)
+  const [currentStory, setCurrentStory] = useState<Story>(null)
   const { currentUser } = useSelector((state: RootState) => state.user);
   const [storyContributorsList, setStoryContributorsList] = useState<Array<any>>([])  
   const [editMode, setEditMode] = useState(false)

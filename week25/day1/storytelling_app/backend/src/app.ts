@@ -15,14 +15,15 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser());
-app.use(cors({
-    origin: 'http://localhost:5173', // frontend URL
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5173', // frontend URL
+//     credentials: true
+// }));
 app.use(morgan('combined'))
 app.use('/api/user', userRouter)
 app.use('/api/stories', storyRouter)
 app.use('/api/contributors', contributorRouter)
+
 
 const port = process.env.PORT || 3001
 app.listen(port, (err) => {

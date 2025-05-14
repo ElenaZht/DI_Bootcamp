@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isAuthorOrColaborator = exports.isContributor = exports.isAuthor = void 0;
+exports.canManageContributors = exports.isAuthorOrColaborator = exports.isContributor = exports.isAuthor = void 0;
 const db_1 = require("../db/db");
 const contributorModel_1 = require("../models/contributorModel");
 const isAuthor = async (req, res, next) => {
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required" });
+            res.status(403).json({ message: "Authentication required" });
             return;
         }
         // fetch story author id from db
@@ -39,12 +39,12 @@ const isContributor = async (req, res, next) => {
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required" });
+            res.status(403).json({ message: "Authentication required" });
             return;
         }
         const storyId = req.params.id;
         if (!storyId) {
-            res.status(403).json({ message: "Story id is required" });
+            res.status(400).json({ message: "Story id is required" });
             return;
         }
         const contributorsList = await (0, contributorModel_1.getStoryContributorsList)(storyId);
@@ -70,7 +70,7 @@ const isAuthorOrColaborator = async (req, res, next) => {
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required." });
+            res.status(403).json({ message: "Authentication required." });
             return;
         }
         const { id: storyId } = req.params;
@@ -113,3 +113,44 @@ const isAuthorOrColaborator = async (req, res, next) => {
     }
 };
 exports.isAuthorOrColaborator = isAuthorOrColaborator;
+const canManageContributors = async (req, res, next) => {
+    try {
+        const user = req.user;
+        if (!user || !user.id) {
+            res.status(403).json({ message: "Authentication required." });
+            return;
+        }
+        const contributor_id = req.params.id;
+        if (!contributor_id) {
+            res.status(400).json({ message: "Contributor id is required.", contributor_id });
+            return;
+        }
+        // check for user an author
+        const contributor = await (0, db_1.db)('contributors')
+            .where({ id: contributor_id })
+            .first();
+        if (!contributor) {
+            res.status(404).json({ message: "Contributor not found." });
+            return;
+        }
+        const story = await (0, db_1.db)('stories')
+            .where({ id: contributor.story_id })
+            .first();
+        console.log("user", user, "contributor_id", contributor_id, "story", story);
+        if (!story) {
+            res.status(404).json({ message: "Associated story not found." });
+            return;
+        }
+        if (story.author_id !== user.id) {
+            res.status(403).json({ message: "Access denied. You are not the author of this story." });
+            return;
+        }
+        console.log("dima2: ", contributor_id);
+        next();
+    }
+    catch (error) {
+        console.error('Error in canManageContributors middleware:', error);
+        res.status(500).json({ message: "Internal server error while checking permissions." });
+    }
+};
+exports.canManageContributors = canManageContributors;

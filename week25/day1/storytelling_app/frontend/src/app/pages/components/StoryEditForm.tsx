@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../../../features/store';
 import { editStory } from '../../../features/thunks/EditStoryThunk';
 import { getAllStories } from '../../../features/StoriesSlice';

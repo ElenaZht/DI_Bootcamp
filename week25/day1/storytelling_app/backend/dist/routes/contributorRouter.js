@@ -7,5 +7,5 @@ const permissions_1 = require("../helpers/permissions");
 const router = (0, express_1.Router)();
 router.post('/', auth_1.authenticate, permissions_1.isAuthor, contributorController_1.addContributor);
 router.get('/:story_id', auth_1.authenticate, contributorController_1.getAllStoryContributor);
-router.delete('/:id', auth_1.authenticate, permissions_1.isAuthor, contributorController_1.deleteContributor);
+router.delete('/:id', auth_1.authenticate, permissions_1.canManageContributors, contributorController_1.deleteContributor);
 exports.default = router;

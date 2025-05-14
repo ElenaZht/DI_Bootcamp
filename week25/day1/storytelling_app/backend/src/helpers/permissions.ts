@@ -7,7 +7,7 @@ export const isAuthor = async (req: Request, res: Response, next: NextFunction):
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required" });
+            res.status(403).json({ message: "Authentication required" });
             return;
         }
 
@@ -44,12 +44,12 @@ export const isContributor = async  (req: Request, res: Response, next: NextFunc
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required" });
+            res.status(403).json({ message: "Authentication required" });
             return;
         }
         const storyId = req.params.id
         if (!storyId){
-            res.status(403).json({message: "Story id is required"})
+            res.status(400).json({message: "Story id is required"})
             return
         }
 
@@ -77,7 +77,7 @@ export const isAuthorOrColaborator = async  (req: Request, res: Response, next: 
     try {
         const user = req.user;
         if (!user) {
-            res.status(401).json({ message: "Authentication required." });
+            res.status(403).json({ message: "Authentication required." });
             return;
         }
         const {id: storyId} = req.params
@@ -129,7 +129,7 @@ export const canManageContributors = async (req: Request, res: Response, next: N
     try {
         const user = req.user;
         if (!user || !user.id) {
-            res.status(401).json({ message: "Authentication required." });
+            res.status(403).json({ message: "Authentication required." });
             return
         
         }

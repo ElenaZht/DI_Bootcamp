@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../../../features/store';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -15,9 +14,7 @@ interface StoryCardProps {
 
 export default function StoryCard({ id, title, content, authorId, createdAt }: StoryCardProps) {
     const [isLoading, setIsLoading] = useState(true)
-    const [error, setError] = useState('')
     const [authorInfo, setAuthorInfo] = useState(null)
-    const username = useSelector((state: RootState) => state.user.currentUser?.username)
     const dispatch = useDispatch<AppDispatch>();
 
     const formatDate = (dateString: string) => {
