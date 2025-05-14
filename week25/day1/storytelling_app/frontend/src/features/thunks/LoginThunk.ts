@@ -12,7 +12,7 @@ export const loginUser = createAsyncThunk(
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                // credentials: 'include',
+                credentials: 'include',
                 body: JSON.stringify(credentials),
             });
             console.log("logine response", response)
