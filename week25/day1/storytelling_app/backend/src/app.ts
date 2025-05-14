@@ -12,28 +12,21 @@ import contributorRouter from './routes/contributorRouter'
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
 });
-// const cors = require("cors");
+
 
 const app = express()
 
 app.use(morgan('combined'))
 
-app.use(cors());
-// app.use(cors({
-//     origin: process.env.ALLOWED_DOMAIN, // frontend URL
-//     credentials: true,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-// }));
+
+app.use(cors({
+    origin: process.env.ALLOWED_DOMAIN, // frontend URL
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-
-// app.use(cors({
-//     origin: process.env.ALLOWED_DOMAIN, // frontend URL
-//     credentials: true,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-// }));
 
 
 app.use('/api/user', userRouter)
