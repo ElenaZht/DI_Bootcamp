@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: process.env.ALLOWED_DOMAIN, // frontend URL
     credentials: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
 }));
 
 app.use(morgan('combined'))
