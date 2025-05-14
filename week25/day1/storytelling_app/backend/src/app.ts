@@ -3,13 +3,14 @@ import cookieParser from 'cookie-parser';
 import userRouter from './routes/userRouter';
 import storyRouter from './routes/storyRouter';
 import contributorRouter from './routes/contributorRouter'
-import cors from 'cors';
+// import cors from 'cors';
 import morgan from 'morgan';
 
 
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
 });
+const cors = require("cors");
 
 const app = express()
 app.use(cors());
