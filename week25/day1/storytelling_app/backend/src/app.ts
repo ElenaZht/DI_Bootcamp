@@ -16,8 +16,9 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser());
 app.use(cors({
-    origin: 'https://storytelling-frontend-wmpd.onrender.com',//process.env.ALLOWED_DOMAIN, // frontend URL
-    credentials: true
+    origin: process.env.ALLOWED_DOMAIN, // frontend URL
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 }));
 
 app.use(morgan('combined'))
