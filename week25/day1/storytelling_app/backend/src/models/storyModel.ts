@@ -1,12 +1,6 @@
 import { db } from '../db/db';
+import type { Story } from '../../../types/StoryTypes';
 
-export interface Story {
-    id?: string;
-    title: string;
-    content: string;
-    author_id: string;
-    created_at: string;
-}
 
 export const getAllStories = async (): Promise<Story[]> => {
     try {
@@ -16,7 +10,7 @@ export const getAllStories = async (): Promise<Story[]> => {
         
     } catch (error) {
         console.error('Error fetching stories:', error);
-        throw error; // Re-throw the error to handle it in the calling function
+        throw error; 
     }
 };
 

@@ -1,11 +1,6 @@
 import { Request, Response } from 'express';
 import {addContributorToTheStory, getStoryContributorsList, deleteContributorFromTheStory} from '../models/contributorModel'
 
-interface Contributor {
-    id: string;
-    story_id: string;
-    user_id: string;
-}
 
 export const addContributor = async (req: Request, res: Response): Promise<void> => {
 

@@ -1,21 +1,8 @@
 import bcrypt from 'bcrypt';
 import { db } from '../db/db';
-import type { User } from '../../../types/UserTypes';
+import type { User, PublicUser } from '../../../types/UserTypes';
+import type { Comment } from '../../../types/StoryTypes';
 
-
-export interface PublicUser {
-    id?: string;
-    username: string;
-    email: string;
-}
-interface Comment {
-    id: string;
-    story_id: string;
-    user_id: string;
-    username?: string;
-    content: string;
-    created_at: string;
-  }
 
 export const createUser = async (password: string, email: string, username: string): Promise<User> => {
     const trx = await db.transaction();
@@ -125,6 +112,6 @@ export const addCommentToStory = async (user_id: string, story_id:string, conten
 
     } catch (error) {
         console.error(`Error adding comment to story_id ${story_id}:`, error);
-        throw error; // Re-throw the error to be handled by the controller
+        throw error;
     }
 }

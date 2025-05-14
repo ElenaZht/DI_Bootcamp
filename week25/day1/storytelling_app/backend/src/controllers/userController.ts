@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken, verifyToken } from '../helpers/jwt_helper';
 import { createUser, getUserByEmail, getUserById, getAllUsersFromDB } from '../models/userModel';
-import { getAllStories } from '../models/storyModel';
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     const { password, email, username } = req.body;
@@ -25,13 +24,6 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         // Generate tokens only if user was created successfully
         const accessToken = generateAccessToken(user.id, user.username);
         const refreshToken = generateRefreshToken(user.id, user.username);
-
-        // Set cookies only after successful user creation
-        // res.cookie('accessToken', accessToken, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     maxAge: 60 * 60 * 1000, // 1 hour
-        // });
         
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -78,12 +70,6 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         const newAccessToken = generateAccessToken(user.id!, user.username);
         const newRefreshToken = generateRefreshToken(user.id!, user.username);
 
-        // Update cookies with new tokens
-        // res.cookie('accessToken', newAccessToken, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     maxAge: 60 * 60 * 1000, // 1 hour
-        // });
         res.cookie('refreshToken', newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

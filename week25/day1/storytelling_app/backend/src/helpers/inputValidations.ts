@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, validationResult, ValidationChain } from 'express-validator';
 
+
 type ValidationMiddleware = (req: Request, res: Response, next: NextFunction) => void;
 type ValidateArray = Array<ValidationChain | ValidationMiddleware>;
 

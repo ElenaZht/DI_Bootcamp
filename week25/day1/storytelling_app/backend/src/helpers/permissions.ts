@@ -1,14 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { db } from '../db/db';
 import {getStoryContributorsList} from '../models/contributorModel'
-
-export interface Story {
-    id: string;
-    title: string;
-    content: string;
-    author_id: string;
-    created_at: string;
-}
+import type {Story} from '../../../types/StoryTypes'
 
 export const isAuthor = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {

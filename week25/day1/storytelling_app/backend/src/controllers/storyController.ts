@@ -7,23 +7,6 @@ import {
 } from '../models/storyModel';
 import { getStoryCommentsById, addCommentToStory } from '../models/userModel';
 
-
-export interface User {
-    id: string;
-    username: string;
-    email: string;
-    password_hash?: string;
-
-}
-
-interface Comment {
-    id: string;
-    story_id: string;
-    user_id: string;
-    username?: string;
-    content: string;
-    created_at: string;
-  }
 declare global {
     namespace Express {
         interface Request {
@@ -122,8 +105,6 @@ export const deleteStory = async (req: Request, res: Response): Promise<void> =>
             return
         }
 
-
-        //delete story
         const deltedStoryTitle = await removeStoryFromDB(id)
         if (!deltedStoryTitle){
             res.status(200).json({message: "Story deleted."})

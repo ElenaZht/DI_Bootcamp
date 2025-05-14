@@ -1,12 +1,6 @@
-import {getStoryById} from './storyModel'
 import { db } from '../db/db';
+import type {Contributor} from '../../../types/ContributorTypes'
 
-
-interface Contributor {
-    id: string;
-    story_id: string;
-    user_id: string;
-}
 
 export const addContributorToTheStory = async (story_id: string, user_id: string): Promise<void> => {
 
@@ -18,7 +12,6 @@ export const addContributorToTheStory = async (story_id: string, user_id: string
             throw Error('User id required')
         }
 
-        // Add new contributor
         await db('contributors').insert({
             story_id: story_id,
             user_id: user_id
@@ -28,8 +21,6 @@ export const addContributorToTheStory = async (story_id: string, user_id: string
         console.error('Error registering contributor:', error);
         throw error;
     }
-
-
 }
 
 export const getStoryContributorsList = async (story_id: string): Promise<Contributor[]> => {
