@@ -32,6 +32,6 @@ app.listen(port, (err) => {
         console.log(err)
         return
     }
-    console.log('server is running on port ', port)
-    console.log("lena cors", process.env.ALLOWED_DOMAIN)
+    console.log('server is running on port ', port, process.env.ALLOWED_DOMAIN)
+    console.info("lena cors", process.env.ALLOWED_DOMAIN)
 })
