@@ -1,8 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import type {SignUpCredentials} from '../../../../types/UserTypes'
+import type {SignUpCredentials, SignUpResponse} from '../../../../types/UserTypes'
 
+interface BackendValidationError {
+    type: string;
+    value: string;
+    msg: string;
+    path: string;
+    location: string;
+}
 
-export const signUp = createAsyncThunk(
+interface BackendErrorPayload {
+    message: string;
+    errors?: BackendValidationError[];
+}
+export const signUp = createAsyncThunk<
+    SignUpResponse,
+    SignUpCredentials,
+    { rejectValue: BackendErrorPayload }
+>(
     'user/register',
     async (credentials: SignUpCredentials, { rejectWithValue }) => {
         try {
@@ -14,18 +29,18 @@ export const signUp = createAsyncThunk(
                 credentials: 'include',
                 body: JSON.stringify(credentials),
             });
-            console.log("register response", response)
-            if (!response.ok) {
-                throw new Error('Registration failed');
-            }
 
             const data = await response.json();
-            console.log("register data", data)
-            return data;
+            if (!response.ok) {
+                return rejectWithValue(data as BackendErrorPayload);            
+            }
+
+            
+            return data as SignUpResponse;
             
         } catch (error: any) {
-            console.log("error", error)
-            return rejectWithValue(error.message);
+            console.error("Network or parsing error in signUp thunk:", error);
+            return rejectWithValue({ message: error.message || 'An unexpected network error occurred' });
         }
     }
 )

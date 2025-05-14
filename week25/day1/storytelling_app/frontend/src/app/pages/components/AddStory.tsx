@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import type { AppDispatch } from '../../../features/store';
 import { addNewStory } from '../../../features/thunks/AddStoryThunk';
+import type { StoryFormData } from '../../../../../types/StoryTypes';
+import type {BackendErrorPayload} from '../../../../../types/ErrorHandlingTypes'
 
-interface StoryForm {
-  title: string;
-  content: string;
-}
 
 export default function AddStory() {
     const dispatch = useDispatch<AppDispatch>();
@@ -15,7 +13,7 @@ export default function AddStory() {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
   
-    const [formData, setFormData] = useState<StoryForm>({
+    const [formData, setFormData] = useState<StoryFormData>({
     title: '',
     content: ''
   });
@@ -25,13 +23,34 @@ export default function AddStory() {
     setError(null);
     setIsLoading(true);
 
+    if (!formData.title.trim() || !formData.content.trim()) {
+      setError("Title and content cannot be empty.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
         await dispatch(addNewStory(formData)).unwrap();
         setFormData({ title: '', content: '' });
         navigate('/');
-    } catch (err) {
-        setError(err as string || 'Failed to create story');
-    } finally {
+
+    } catch (err: any) {
+      let displayMessage = 'Failed to create story. Please check your input or try again later.';
+
+      if (err && typeof err === 'object') {
+          const backendError = err as BackendErrorPayload;
+
+          if (backendError.errors && Array.isArray(backendError.errors) && backendError.errors.length > 0) {
+              if (typeof backendError.errors[0].msg === 'string' && backendError.errors[0].msg.trim() !== '') {
+                  displayMessage = backendError.errors[0].msg;
+              }
+          } else if (typeof backendError.message === 'string' && backendError.message.trim() !== '') {
+              displayMessage = backendError.message;
+          }
+      }
+
+      setError(displayMessage);  
+      } finally {
         setIsLoading(false);
     }
 };
@@ -41,6 +60,15 @@ export default function AddStory() {
       ...formData,
       [e.target.name]: e.target.value
     });
+    if (error) setError(null); 
+
+  };
+
+  const handleClearForm = () => {
+    setFormData({ title: '', content: '' });
+    setError(null);
+    // focus the title input
+    document.getElementsByName('title')[0]?.focus();
   };
 
   return (
@@ -49,6 +77,14 @@ export default function AddStory() {
         <div className="card-body p-4 space-y-2">
           <h2 className="text-xl font-bold">New Story</h2>
           
+          {/* Error Display Area */}
+          {error && (
+            <div role="alert" className="alert alert-error shadow-lg text-xs p-2 my-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2 2m2-2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span>{error}</span>
+            </div>
+          )}
+
           <div className="form-control">
             <input
               type="text"
@@ -58,6 +94,7 @@ export default function AddStory() {
               value={formData.title}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -69,12 +106,22 @@ export default function AddStory() {
               value={formData.content}
               onChange={handleChange}
               required
+              disabled={isLoading}
             />
           </div>
 
           <div className="card-actions justify-end pt-2">
-            <button type="button" className="btn btn-sm">Cancel</button>
-            <button type="submit" className="btn btn-primary btn-sm">Add Story</button>
+            <button onClick={handleClearForm} type="button" className="btn btn-sm btn-ghost" disabled={isLoading}>Clear</button>
+            <button type="submit" className="btn btn-primary btn-sm" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <span className="loading loading-spinner loading-xs"></span>
+                  Adding...
+                </>
+              ) : (
+                'Add Story'
+              )}
+            </button>
           </div>
         </div>
       </form>

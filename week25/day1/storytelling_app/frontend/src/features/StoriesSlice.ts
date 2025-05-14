@@ -54,14 +54,24 @@ export const storiesSlice = createSlice({
         builder
             .addCase(addNewStory.pending, (state) => {
                 state.status = 'loading';
+                state.error = null;
             })
-            .addCase(addNewStory.fulfilled, (state) => {
-                state.status = 'succeeded';
+            .addCase(addNewStory.fulfilled, (state, action) => {
                 state.status = 'idle';
+                state.error = null;
+                state.items.unshift(action.payload.story);
             })
             .addCase(addNewStory.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.payload as string;
+                if (state.items.length > 0) {
+                    // If stories were already successfully loaded, keep the status as 'succeeded'.
+                    state.status = 'succeeded';
+                } else {
+                    // If no stories were loaded (e.g., initial load failed, or this is the very first action),
+                    // set to 'idle'. If getAllStories was also failing, it would set it to 'failed'.
+                    state.status = 'idle';
+                }
+
+                console.log("addNewStory.rejected in StoriesSlice, error handled by AddStory form:", action.payload);
             });
     }
 })

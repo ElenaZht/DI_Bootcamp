@@ -37,6 +37,13 @@ export default function Comments({story_id}: CommentsProps) {
         if (postSuccessMessage) setPostSuccessMessage(null);
     };
 
+
+        useEffect(() => {
+            if (currentUser) {
+                fetchStoryComments()
+            }
+        }, [dispatch, currentUser]);
+        
     const fetchStoryComments = useCallback(async () => {
         if (story_id) {
             setIsLoadingComments(true);
@@ -46,7 +53,7 @@ export default function Comments({story_id}: CommentsProps) {
                 if (getStoryComments.fulfilled.match(resultAction)) {
                     setComments(Array.isArray(resultAction.payload.comments) ? resultAction.payload.comments : []);
                 } else if (getStoryComments.rejected.match(resultAction)) {
-                    setError(resultAction.payload as string || "Failed to load comments.");
+                    setError(resultAction.payload as string || "Failed to load comments.!!");
                 }
             } catch (err) {
                 console.error("Error fetching comments:", err);
@@ -59,9 +66,6 @@ export default function Comments({story_id}: CommentsProps) {
         }
     }, [story_id, dispatch]);
 
-    useEffect(() => {
-        fetchStoryComments();
-    }, [fetchStoryComments]); 
 
     const handleSubmitComment = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -123,26 +127,45 @@ export default function Comments({story_id}: CommentsProps) {
                     disabled={isPostingComment}
                 ></textarea>
                 </div>
-                {error && <p className="text-error text-xs mt-1 text-left">{error}</p>}
+                {/* Display error from posting a comment */}
+                {error && !isLoadingComments && <p className="text-error text-xs mt-1 text-left">{error}</p>}
+                {/* Display success message from posting a comment */}
+                {postSuccessMessage && <p className="text-success text-xs mt-1 text-left">{postSuccessMessage}</p>}
                 <div className="card-actions justify-start w-full">
                 <button
                     type="submit"
                     className="btn btn-primary btn-sm"
-                    disabled={!newComment.trim()} 
+                    disabled={!newComment.trim() || isPostingComment}
                 >
-                    Post Comment
+                    {isPostingComment ? (
+                        <>
+                            <span className="loading loading-spinner loading-xs"></span>
+                            Posting...
+                        </>
+                    ) : (
+                        'Post Comment'
+                    )}
                 </button>
                 </div>
             </form>
             </div>
 
             {/* Display Existing Comments */}
-            
-            {comments.length > 0 ? (
+            {isLoadingComments ? (
+                <div className="flex justify-center items-center py-4">
+                    <span className="loading loading-dots loading-md text-primary"></span>
+                    <p className="ml-2">Loading comments...</p>
+                </div>
+            ) : error && comments.length === 0 ? ( 
+                <div role="alert" className="alert alert-error shadow-lg text-xs p-2 my-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2 2m2-2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>{error}</span>
+                </div>
+            ) : comments.length > 0 ? (
             <>
                 <h3 className="text-lg font-semibold mb-3 text-left">Existing Comments</h3>
                 <div className="space-y-4">
-                {comments.map((comment) => (
+                {comments.map((comment: any) => (
                     <div key={comment.id} className="card bg-base-200 shadow">
                     <div className="card-body p-3">
                         <p className="text-sm text-left mb-1.5">{comment.content}</p>
