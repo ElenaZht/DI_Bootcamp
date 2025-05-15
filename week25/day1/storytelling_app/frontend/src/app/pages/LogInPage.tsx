@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { loginUser } from '../../features/thunks/LoginThunk'
 import type { AppDispatch } from '../../features/store'
 import type {LoginForm, LoginError} from '../../../../types/UserTypes'
+import { getAllStories } from '../../features/StoriesSlice'
 
 
 export default function LogInPage() {
@@ -25,7 +26,9 @@ export default function LogInPage() {
     setSuccessMessage(null);
     try {
         await dispatch(loginUser(formData)).unwrap();
+        dispatch(getAllStories()); 
         setSuccessMessage('Login successful! Redirecting...');
+        
         setTimeout(() => {
           navigate('/');
       }, 1500); // 1.5 seconds delay

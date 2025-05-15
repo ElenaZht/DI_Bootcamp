@@ -20,10 +20,7 @@ export default function UserData () {
             console.error('Logout failed:', error);
         }
     };
-    useEffect(() => {
-        console.log("userdata user", currentUser)
 
-    }, [currentUser])
     
     if (status === 'loading') {
         return (

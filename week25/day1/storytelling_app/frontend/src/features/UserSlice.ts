@@ -50,13 +50,12 @@ export const userSlice = createSlice({
                 state.token = action.payload.newAccessToken;  // access token
                 state.isAuthenticated = true;
                 state.error = null;
-                console.log("login fullfiled action.payload", action.payload)
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload as string || 'Unknown error occurred';
                 state.isAuthenticated = false;
-                console.log("login failed", state)
+                console.error("login failed", state.error)
             });
 
         // Signup

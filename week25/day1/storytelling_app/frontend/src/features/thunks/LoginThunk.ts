@@ -15,13 +15,13 @@ export const loginUser = createAsyncThunk(
                 credentials: 'include',
                 body: JSON.stringify(credentials),
             });
-            console.log("logine response", response)
+            
             if (!response.ok) {
                 throw new Error('Login failed');
             }
             
             const data = await response.json();
-            console.log("data", data)
+            console.log("Lena loginUser", data)
             return data;
         } catch (error: any) {
             console.log("error", error)
