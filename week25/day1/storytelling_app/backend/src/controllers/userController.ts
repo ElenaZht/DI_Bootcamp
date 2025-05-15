@@ -78,7 +78,8 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         console.log("dima ENV ", process.env.NODE_ENV)
         res.cookie('refreshToken', newRefreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            // secure: process.env.NODE_ENV == 'production',
+            secure: true,
             sameSite: 'none',
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
         });
