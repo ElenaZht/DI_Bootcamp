@@ -17,6 +17,7 @@ export const getAllStories = createAsyncThunk(
                 throw new Error('Failed to fetch stories');
             }
             const data: Story[] = await response.json();
+            console.log("getAllStories... data:", data)
             return data;
         } catch (error: any) {
             return rejectWithValue(error.message);
