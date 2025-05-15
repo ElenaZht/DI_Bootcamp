@@ -227,10 +227,8 @@ export default function StoryViewer() {
         try {
           setIsLoading(true)
           setError('')
-          console.log("dima lena", id)
           await dispatch(deleteContributor(contributor_id))
           fetchStoryContributorsList(id)
-          console.log("dima lena2")
           
         } catch (error) {
           console.log("Failed to delete contributor", error)

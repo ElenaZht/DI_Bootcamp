@@ -10,6 +10,7 @@ export const getAllStories = createAsyncThunk(
     'stories/getAll',
     async (_, { getState, rejectWithValue }) => {
         try {
+            console.log("getAllStories...")
             const accessToken = getState().user.token;
             const response = await authenticatedFetch(`${BASE_URL}/api/stories`, accessToken);
             if (!response.ok) {

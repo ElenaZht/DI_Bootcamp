@@ -75,7 +75,6 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         // Provide new tokens for authorized user
         const newAccessToken = generateAccessToken(user.id!, user.username);
         const newRefreshToken = generateRefreshToken(user.id!, user.username);
-        console.log("dima ENV ", process.env.NODE_ENV)
         res.cookie('refreshToken', newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV == 'production',

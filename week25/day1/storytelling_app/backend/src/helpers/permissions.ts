@@ -165,7 +165,6 @@ export const canManageContributors = async (req: Request, res: Response, next: N
             res.status(403).json({ message: "Access denied. You are not the author of this story." });
             return;
         }
-        console.log("dima2: ", contributor_id)
         next();
         
     } catch (error) {

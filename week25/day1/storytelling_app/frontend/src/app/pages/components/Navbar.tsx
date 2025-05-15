@@ -44,7 +44,6 @@ export default function Navbar() {
 
                 // Cleanup function
         return () => {
-            console.log("dima cleanup:", isAuthenticated)
             // No specific cleanup needed for this effect
         };
       }, [dispatch, isAuthenticated]);
