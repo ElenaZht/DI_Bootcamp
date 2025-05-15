@@ -44,10 +44,6 @@ export default function Navbar() {
         };
         if (!isAuthenticated) tryRefreshToken();
 
-                // Cleanup function
-        return () => {
-            // No specific cleanup needed for this effect
-        };
       }, [dispatch, isAuthenticated]);
 
   return (
