@@ -21,10 +21,9 @@ export const loginUser = createAsyncThunk(
             }
             
             const data = await response.json();
-            console.log("Lena loginUser", data)
             return data;
         } catch (error: any) {
-            console.log("error", error)
+            console.error("error", error)
             return rejectWithValue(error.message);
         }
     }

@@ -9,7 +9,6 @@ export const addContributor = createAsyncThunk(
     async (data, { getState, rejectWithValue }) => {
         try {
             const {user_id, story_id, user} = data
-            console.log("data add contr", data)
             const accessToken = getState().user.token;
             const response = await authenticatedFetch(`${BASE_URL}/api/contributors`, accessToken, {
                 method: 'POST',

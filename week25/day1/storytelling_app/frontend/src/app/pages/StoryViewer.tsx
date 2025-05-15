@@ -96,12 +96,10 @@ export default function StoryViewer() {
   };
 
   useEffect(() => {
-    console.log("stories", stories)
 
     const fetchAuthorInfo = async(author_id: string) => {
       try {
         const userI = await dispatch(getUserById(author_id)).unwrap();
-        console.log("userI", userI)
         if (userI){
           setAuthorName(userI.username)
           
@@ -114,7 +112,6 @@ export default function StoryViewer() {
 
     if (stories.length > 0){
       const story = stories.find(s => s.id == id)
-      console.log("story!!", story)
       setCurrentStory(story)
       fetchAuthorInfo(story.author_id)
       fetchStoryContributorsList(id)
@@ -128,7 +125,6 @@ export default function StoryViewer() {
       try {
         const storyContributors = await dispatch(getStoryContributors(id));
         if(storyContributors && storyContributors.payload){
-          console.log("fetchStoryContributorsList", storyContributors.payload);
           setStoryContributorsList(
             Array.isArray(storyContributors.payload) ? storyContributors.payload : []
           );
@@ -161,7 +157,6 @@ export default function StoryViewer() {
       setIsLoading(true);
 
       try {        
-          console.log("handle submit")
           await dispatch(editStory({id: id, story: formData})).unwrap();
           await dispatch(getAllStories())
           setFormData({ title: '', content: '' });

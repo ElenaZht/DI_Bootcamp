@@ -10,14 +10,12 @@ export const getAllStories = createAsyncThunk(
     'stories/getAll',
     async (_, { getState, rejectWithValue }) => {
         try {
-            console.log("getAllStories...")
             const accessToken = getState().user.token;
             const response = await authenticatedFetch(`${BASE_URL}/api/stories`, accessToken);
             if (!response.ok) {
                 throw new Error('Failed to fetch stories');
             }
             const data: Story[] = await response.json();
-            console.log("getAllStories... data:", data)
             return data;
         } catch (error: any) {
             return rejectWithValue(error.message);

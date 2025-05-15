@@ -15,7 +15,6 @@ export const getStoryComments = createAsyncThunk(
             }
             
             const data = await response.json();
-            console.log("comments data", data)
             return data;
 
         } catch (error: any) {

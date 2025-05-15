@@ -53,7 +53,6 @@ export default function SignUpPage() {
         setIsLoading(false);
       }
 
-    console.log('Signup attempted:', formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

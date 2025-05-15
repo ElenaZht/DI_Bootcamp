@@ -9,7 +9,6 @@ export const editStory = createAsyncThunk(
     try {
             const story_id = data.id
             const storyData = data.story
-            console.log("edit story_id", story_id)
             const accessToken = getState().user.token;
             const response = await authenticatedFetch(`${BASE_URL}/api/stories/${story_id}`, accessToken, {
                 method: 'PATCH',

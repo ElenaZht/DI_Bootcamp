@@ -30,9 +30,7 @@ export default function Navbar() {
         const tryRefreshToken = async () => {
           try {
             const result = await dispatch(refreshToken()).unwrap();
-            console.log("tryRefreshToken:", result)
             if (result.user_id) {
-                console.log("tryRefreshToken user:", result.user_id)
               const userData = await dispatch(getUserById(result.user_id)).unwrap();
               dispatch(setUser(userData));
              dispatch(getAllStories())
