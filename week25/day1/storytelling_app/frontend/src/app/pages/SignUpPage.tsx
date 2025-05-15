@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import type { AppDispatch } from '../../features/store'
 import { signUp } from '../../features/thunks/SignUpThunk'
 import type {SignUpForm} from '../../../../types/UserTypes'
+import { getAllStories } from '../../features/StoriesSlice'
 interface BackendValidationError {
   type: string;
   value: string;
@@ -35,7 +36,11 @@ export default function SignUpPage() {
 
     try {
         await dispatch(signUp(formData)).unwrap();
-        navigate('/account')
+        dispatch(getAllStories()); 
+        
+        setTimeout(() => {
+          navigate('/');
+      }, 1500); // 1.5 seconds delay
 
     } catch (err) {
       const backendError = err as BackendErrorPayload
