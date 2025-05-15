@@ -229,12 +229,13 @@ export default function StoryViewer() {
           setError('')
           await dispatch(deleteContributor(contributor_id))
           fetchStoryContributorsList(id)
+          setIsLoading(false)
           
         } catch (error) {
           console.log("Failed to delete contributor", error)
           setIsLoading(false)
           setError(error?.message)
-        }
+        } 
       } 
     }
 
