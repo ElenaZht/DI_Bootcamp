@@ -31,7 +31,7 @@ export default function StoryCard({ id, title, content, authorId, createdAt }: S
 
             const userI = await dispatch(getUserById(authorId)).unwrap();
             console.log("storyCard user:", userI);
-            setAuthorInfo(userI.username)
+            setAuthorInfo(userI)
             setIsLoading(false)
         }
         fetchData()
