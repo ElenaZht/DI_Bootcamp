@@ -29,8 +29,8 @@ export default function StoryCard({ id, title, content, authorId, createdAt }: S
     useEffect(()=> {
         async function fetchData() {
 
-            const userI = await dispatch(getUserById(authorId));
-            setAuthorInfo(userI.payload)
+            const userI = await dispatch(getUserById(authorId)).unwrap();
+            setAuthorInfo(userI.username)
             setIsLoading(false)
         }
         fetchData()

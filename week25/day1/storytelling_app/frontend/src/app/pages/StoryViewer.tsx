@@ -103,7 +103,7 @@ export default function StoryViewer() {
         const userI = await dispatch(getUserById(author_id)).unwrap();
         console.log("userI", userI)
         if (userI){
-          setAuthorName(userI.payload.username)
+          setAuthorName(userI.username)
           
         }
       } catch (error) {
