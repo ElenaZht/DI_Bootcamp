@@ -283,7 +283,7 @@ export default function StoryViewer() {
             {error && <p className='text-sm text-red-600'>{error}</p>}
             <div className="text-sm text-gray-500">
               {authorName.length && <p className="text-left">Author: {authorName}</p>}
-              <p className="text-left">Date: {formatDate(currentStory?.created_at)}</p>
+              {currentStory?.created_at && <p className="text-left">Date: {formatDate(currentStory?.created_at)}</p>}
             </div>
             
             <p className="text-left mt-4">{currentStory?.content}</p>
